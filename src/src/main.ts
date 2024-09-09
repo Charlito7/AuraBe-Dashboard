@@ -13,6 +13,8 @@ import "swiper/css/bundle";
 // main.ts or main.js
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.js'; // for using modals and other JS components
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 
 import "./assets/custom.scss";

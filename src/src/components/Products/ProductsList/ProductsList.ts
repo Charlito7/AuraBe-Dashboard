@@ -1,39 +1,75 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 
-// Define the interface for the Product object
+// Define the structure of the Product interface
 interface Product {
   id: string;
   name: string;
-  description: string;
   barCode: string;
   categoryName: string;
-  expiredDate: string;
-  quantity: number;
   price: number;
-  minimumReorderQuantity: number;
+  quantity: number;
 }
 
 export default defineComponent({
   name: "ProductsList",
   data() {
     return {
-      products: [] as Product[], // Explicitly typing the products array as an array of Product objects
-      productToDelete: null as Product | null, // To store the selected product for deletion
+      products: [] as Product[], // Explicitly type products as an array of Product objects
+      currentPage: 1,
+      pageSize: 10,
+      totalPages: 1,
+      visiblePages: [] as number[], // Array to store the visible page numbers
+      pagesToShow: 5, // Number of pages to show at a time
     };
   },
   mounted() {
     this.fetchProducts();
   },
   methods: {
-    // Fetch product list from the backend
     async fetchProducts() {
       try {
-        const response = await axios.post("http://localhost:5254/api/products/GetProductList");
-        this.products = response.data.result;
+        const response = await axios.post(
+          `http://localhost:5254/api/products/GetProductListPagination?page=${this.currentPage}&pageSize=${this.pageSize}`
+        );
+        this.products = response.data.result.products;
+        this.totalPages = response.data.result.pagination.totalPages; // Set total pages based on response
+        this.setVisiblePages(); // Calculate visible pages after fetching the data
       } catch (error) {
         console.error("Error fetching products:", error);
       }
+    },
+    setVisiblePages() {
+      // Calculate the range of pages to show dynamically based on the currentPage
+      const start = Math.max(1, this.currentPage - Math.floor(this.pagesToShow / 2));
+      const end = Math.min(this.totalPages, start + this.pagesToShow - 1);
+
+      this.visiblePages = [];
+      for (let i = start; i <= end; i++) {
+        this.visiblePages.push(i);
+      }
+    },
+    goToPage(page: number) {
+      this.currentPage = page;
+      this.fetchProducts();
+    },
+    previousPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.setVisiblePages();
+        this.fetchProducts();
+      }
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+        this.setVisiblePages();
+        this.fetchProducts();
+      }
+    },
+    changePageSize() {
+      this.currentPage = 1; // Reset to the first page when page size changes
+      this.fetchProducts();
     },
   },
 });

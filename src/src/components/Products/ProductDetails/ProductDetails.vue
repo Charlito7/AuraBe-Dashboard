@@ -1,13 +1,10 @@
 <template>
   <div class="card border-0 shadow-none rounded-1 mb-40">
     <div class="card-body p-xl-60">
-      <div class="row gx-xxl-6">
+      <div v-if="product" class="row gx-xxl-6">
         <div class="col-xl-4 col-lg-5 pe-xxl-1">
           <div class="single-product-img">
-            <img
-              src="../../../assets/img/products/single-product.webp"
-              alt="Product"
-            />
+            <img :src="product.imageUrl" alt="Product" />
           </div>
         </div>
         <div class="col-xl-8 col-lg-7 ps-xxl-6">
@@ -21,62 +18,41 @@
             <tbody>
               <tr>
                 <th scope="row">Product Code</th>
-                <td>3214578</td>
+                <td>{{ product.barCode }}</td> <!-- Use camelCase for barCode -->
               </tr>
               <tr>
-                <th scope="row">Product name</th>
-                <td>Camera</td>
+                <th scope="row">Product Name</th>
+                <td>{{ product.name }}</td> <!-- Use camelCase for name -->
               </tr>
               <tr>
                 <th scope="row">Category</th>
-                <td>Electronics</td>
+                <td>{{ product.categoryName }}</td> <!-- Use camelCase for categoryName -->
               </tr>
               <tr>
                 <th scope="row">Brand</th>
-                <td>Nikon</td>
+                <td>{{ product.brand }}</td>
               </tr>
               <tr>
                 <th scope="row">Price</th>
-                <td>$120.00</td>
+                <td>{{ product.price }}</td> <!-- Use camelCase for price -->
               </tr>
               <tr>
-                <th scope="row">Cost</th>
-                <td>$150.00</td>
-              </tr>
-              <tr>
-                <th scope="row">Unit</th>
-                <td>pc</td>
-              </tr>
-              <tr>
-                <th scope="row">Tax</th>
-                <td>2.5%</td>
+                <th scope="row">Product Quantity</th>
+                <td>{{ product.quantity }}</td> <!-- Use camelCase for quantity -->
               </tr>
               <tr>
                 <th scope="row">Stock Alert</th>
-                <td>
-                  <span class="badge badge-outline-green fs-14 fw-semibold"
-                    >20</span
-                  >
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <table class="table single-product-table style-two mb-0">
-            <thead>
-              <tr>
-                <th scope="col">STOCK</th>
-                <th scope="col">QUANTITY</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">Warehouse 01</th>
-                <td>123px</td>
+                <td>{{ product.minimumReorderQuantity }}</td> <!-- Use camelCase for minimumReorderQuantity -->
               </tr>
               <tr>
-                <th scope="row">Warehouse 02</th>
-                <td>72pc</td>
+                <th scope="row">Expiry Date</th>
+                <td>{{ product.expiredDate }}</td> <!-- Use camelCase for expiredDate -->
               </tr>
+              <tr>
+                <th scope="row">Notes</th>
+                <td>{{ product.description }}</td> <!-- Use camelCase for description -->
+              </tr>
+              <!-- Additional product details here -->
             </tbody>
           </table>
         </div>
@@ -85,8 +61,4 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "ProductDetails",
-};
-</script>
+<script lang="ts" src="./ProductDetails.ts"></script>
