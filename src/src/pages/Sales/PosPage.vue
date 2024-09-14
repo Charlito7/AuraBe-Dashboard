@@ -45,8 +45,8 @@ export default defineComponent({
   components: {
     MainHeader,
     MainSidebar,
-    PosLeftContent,
     PosRightContent,
+    PosLeftContent,
     EditContent,
     MainFooter,
   },

@@ -2,47 +2,6 @@
   <div class="pos-right">
     <form action="#" class="pb-60">
       <div class="row gx-xxl-6">
-        <div class="col-lg-6">
-          <div class="form-group mb-20">
-            <label class="d-block fs-14 text-black mb-2">
-              Reference Number
-            </label>
-            <input
-              type="text"
-              class="w-100 d-block shadow-none fs-14 bg-white rounded-1 text-title"
-              placeholder="Enter Reference Number"
-            />
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="form-group mb-20">
-            <label class="d-block fs-14 text-black mb-2">Warehouse</label>
-            <select class="bg-white border-0 rounded-1 fs-14 text-optional">
-              <option value="0">Choose Warehouse</option>
-              <option value="1">Warehouse 01</option>
-              <option value="2">Warehouse 02</option>
-              <option value="3">Warehouse 03</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="form-group mb-20">
-            <label class="d-block fs-14 text-black mb-2">Customer</label>
-            <select class="bg-white border-0 rounded-1 fs-14 text-optional">
-              <option value="0">Walk-in Customer</option>
-              <option value="1">Walk-in Customer</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="form-group mb-20">
-            <label class="d-block fs-14 text-black mb-2">Biller</label>
-            <select class="bg-white border-0 rounded-1 fs-14 text-optional">
-              <option value="0">Jhon Doe</option>
-              <option value="1">Fredik Jhone</option>
-            </select>
-          </div>
-        </div>
         <div class="col-12">
           <div class="form-group mb-20">
             <label class="d-block fs-14 text-black mb-2">Choose Product</label>
