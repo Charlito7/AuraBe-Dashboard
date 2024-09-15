@@ -143,7 +143,7 @@
       </div>
     </div>
 
-    <SubmitPurchase v-if="products.length > 0" :totalCost="totalCost" />
+    <SubmitPurchase v-if="products.length > 0" :totalCost="totalCost" :products="products" />
 
     <div class="flex-grow-1"></div>
     <MainFooter />

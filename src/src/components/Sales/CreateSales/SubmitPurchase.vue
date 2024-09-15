@@ -104,6 +104,7 @@
           rows="10"
           placeholder="Add a note"
           class="d-block w-100 bg-white border-0 rounded-1 resize-none fs-14 text-title"
+          v-model="submitPurchaseResume.notes"
         ></textarea>
       </div>
     </div>
@@ -126,12 +127,17 @@ interface SubmitPurchase {
   discount: number;
   shippingCost: number;
   grandTotal: number; 
+  notes: string;
 }
 export default {
   name: "SubmitPurchase",
   props: {
     totalCost: {
       type: Number,
+      required: true,
+    },
+    products: {
+      type: Array,
       required: true,
     },
   },
@@ -141,6 +147,7 @@ export default {
       discount: 0.00,
       shippingCost: 0.00,
       grandTotal: 0.00,
+      notes: ""
     });
 
     const orderTax = computed(() => {
