@@ -120,7 +120,7 @@
                   <div class="button-group style-two ms-auto d-flex flex-wrap align-items-center">
                     <a class="delete-btn" data-bs-toggle="offcanvas" href="#deletePopup" role="button"
                       aria-controls="deletePopup">
-                      <img src="../../assets/img/icons/close.svg" alt="Close Icon" />
+                      <img src="../../assets/img/icons/close.svg" alt="Close Icon" @click="deleteProduct(product)" />
                     </a>
                   </div>
                 </td>
@@ -252,6 +252,17 @@ export default defineComponent({
   // Additional logic for quantity change can be added here
 };
 
+const deleteProduct = (product: Product) => {
+  // Find the index of the product in the array
+  const index = products.value.findIndex(p => p.id === product.id);
+
+  // If the product is found, remove it from the array
+  if (index !== -1) {
+    products.value.splice(index, 1);
+  }
+};
+
+
     return {
       barcode,
       products,
@@ -260,7 +271,8 @@ export default defineComponent({
       decrement,
       searchProduct,
       formatNumber,
-      onQuantityChange
+      onQuantityChange,
+      deleteProduct
     };
   }
 });
