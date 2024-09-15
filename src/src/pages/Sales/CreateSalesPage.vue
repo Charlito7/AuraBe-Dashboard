@@ -6,13 +6,23 @@
     <div class="row mb-40">
       <div class="col-lg-4">
         <div class="form-group mb-25">
-          <label class="d-block fs-14 text-black mb-2">Date</label>
-          <input type="date" class="w-100 h-55 bg_ash border-0 rounded-1 fs-14 text-black bg-white" />
-        </div>
+    <label class="d-block fs-14 text-black mb-2">Date</label>
+    <div class="d-flex align-items-center">
+      <input 
+        type="text" 
+        class="w-100 h-55 bg_ash border-0 rounded-1 fs-14 text-black bg-white" 
+        :value="todayDate" 
+        readonly
+      />
+      <span class="ms-2">
+        <i class="fas fa-edit fs-16" @click="editDate"></i> <!-- Edit icon using FontAwesome -->
+      </span>
+    </div>
+  </div>
       </div>
       <div class="col-lg-4">
         <div class="form-group mb-25">
-          <label class="d-block fs-14 text-black mb-2">Customer</label>
+          <label class="d-block fs-14 text-black mb-2">Customer Code</label>
           <select class="bg-white border-0 rounded-1 fs-14 text-optional">
             <option value="0">John Victim</option>
             <option value="1">Tony Stark</option>
@@ -21,12 +31,8 @@
       </div>
       <div class="col-lg-4">
         <div class="form-group mb-25">
-          <label class="d-block fs-14 text-black mb-2">Warehouse</label>
-          <select class="bg-white border-0 rounded-1 fs-14 text-optional">
-            <option value="0">Select Warehouse</option>
-            <option value="1">Warehouse 01</option>
-            <option value="2">Warehouse 02</option>
-          </select>
+          <label class="d-block fs-14 text-black mb-2">Customer Name</label>
+          <input type="text" class="w-100 h-55 bg_ash border-0 rounded-1 fs-14 text-black bg-white" />
         </div>
       </div>
       <div class="col-12">
@@ -84,6 +90,11 @@
               </tr>
             </thead>
             <tbody>
+              <tr v-if="products.length === 0">
+                <td colspan="9" class="text-center fs-14">
+                  No products are selected yet
+                </td>
+              </tr>
               <tr v-for="product in products" :key="product.id">
                 <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph ps-0">
                   {{ product.name }}
@@ -126,12 +137,13 @@
                 </td>
               </tr>
             </tbody>
+
           </table>
         </div>
       </div>
     </div>
 
-    <SubmitPurchase />
+    <SubmitPurchase v-if="products.length > 0" :totalCost="totalCost" />
 
     <div class="flex-grow-1"></div>
     <MainFooter />
@@ -150,7 +162,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import axios from "axios";
 
 import MainHeader from "../../components/Layouts/MainHeader.vue";
@@ -240,39 +252,62 @@ export default defineComponent({
       return num.toFixed(2);
     };
     const onQuantityChange = (product: Product) => {
-  // Ensure the entered quantity is within the allowable stock range
-  if (product.salesQuantity > product.quantity) {
-    alert("Quantity exceeds available stock.");
-    product.salesQuantity = product.quantity; // Reset to max quantity
-  } else if (product.salesQuantity < 1) {
-    alert("Quantity cannot be less than 1.");
-    product.salesQuantity = 1; // Reset to minimum quantity
-  }
+      // Ensure the entered quantity is within the allowable stock range
+      if (product.salesQuantity > product.quantity) {
+        alert("Quantity exceeds available stock.");
+        product.salesQuantity = product.quantity; // Reset to max quantity
+      } else if (product.salesQuantity < 1) {
+        alert("Quantity cannot be less than 1.");
+        product.salesQuantity = 1; // Reset to minimum quantity
+      }
 
-  // Additional logic for quantity change can be added here
-};
+      // Additional logic for quantity change can be added here
+    };
 
-const deleteProduct = (product: Product) => {
-  // Find the index of the product in the array
-  const index = products.value.findIndex(p => p.id === product.id);
+    const deleteProduct = (product: Product) => {
+      // Find the index of the product in the array
+      const index = products.value.findIndex(p => p.id === product.id);
 
-  // If the product is found, remove it from the array
-  if (index !== -1) {
-    products.value.splice(index, 1);
-  }
-};
+      // If the product is found, remove it from the array
+      if (index !== -1) {
+        products.value.splice(index, 1);
+      }
+    };
 
+    const totalCost = computed(() => {
+      return products.value.reduce((acc, product) => {
+        return acc + product.salesQuantity * product.price;
+      }, 0);
+    });
 
+    // Get today's date in the format DD-MM-YYYY
+  
+
+    // Function to format the date as DD-MM-YYYY
+    const formatDate = (date: Date) => {
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+      const year = date.getFullYear();
+      return `${day}-${month}-${year}`;
+    };
+    const todayDate = ref(formatDate(new Date()));
+    const editDate = () => {
+      // Your logic for enabling editing the date or any custom functionality
+      alert("Only admin can change the date")
+    };
     return {
       barcode,
       products,
       quantity,
+      totalCost,
+      todayDate,
       increment,
       decrement,
       searchProduct,
       formatNumber,
       onQuantityChange,
-      deleteProduct
+      deleteProduct,
+      editDate
     };
   }
 });

@@ -6,10 +6,10 @@
           <div class="form-group mb-25">
             <label class="d-block fs-14 text-black mb-2">Order Tax</label>
             <input
-              type="number"
-              class="w-100 d-block shadow-none fs-14 bg-white rounded-1 text-title"
-              placeholder="0"
-            />
+  type="number"
+  class="w-100 d-block shadow-none fs-14 bg-white rounded-1 text-title"
+  v-model="submitPurchaseResume.orderTaxPercentage"
+/>
             <span
               class="percent-sign position-absolute rounded-1 text-center d-flex flex-column justify-content-center"
             >
@@ -23,7 +23,7 @@
             <input
               type="number"
               class="w-100 d-block shadow-none fs-14 bg-white rounded-1 text-title"
-              placeholder="0"
+               v-model="submitPurchaseResume.discount"
             />
             <span
               class="percent-sign position-absolute rounded-1 text-center d-flex flex-column justify-content-center fw-semibold fs-16"
@@ -38,7 +38,7 @@
             <input
               type="number"
               class="w-100 d-block shadow-none fs-14 bg-white rounded-1 text-title"
-              placeholder="0"
+               v-model="submitPurchaseResume.shippingCost"
             />
             <span
               class="percent-sign position-absolute rounded-1 text-center d-flex flex-column justify-content-center fw-semibold fs-16"
@@ -67,7 +67,7 @@
                 ORDER TAX :
               </th>
               <td class="fs-14 fw-semibold lh-1 text-optional text-end">
-                $00.00
+                ${{orderTax.toFixed(2) }}
               </td>
             </tr>
             <tr>
@@ -75,7 +75,7 @@
                 DISCOUNT :
               </th>
               <td class="fs-14 fw-semibold lh-1 text-optional text-end">
-                $150.00
+                ${{submitPurchaseResume.discount}}
               </td>
             </tr>
             <tr>
@@ -83,14 +83,14 @@
                 SHIPPING :
               </th>
               <td class="fs-14 fw-semibold lh-1 text-optional text-end">
-                $50.00
+                ${{submitPurchaseResume.shippingCost}}
               </td>
             </tr>
             <tr>
               <th scope="row" class="fs-14 text-title lh-1 ls-1 fw-semibold">
                 GRAND TOTAL :
               </th>
-              <td class="fs-14 fw-bold lh-1 text-purple text-end">$200.00</td>
+              <td class="fs-14 fw-bold lh-1 text-purple text-end">${{ grandTotal.toFixed(2) }}</td>
             </tr>
           </tbody>
         </table>
@@ -118,8 +118,43 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { ref, computed } from 'vue';
+
+interface SubmitPurchase {
+  orderTaxPercentage: number;
+  discount: number;
+  shippingCost: number;
+  grandTotal: number; 
+}
 export default {
   name: "SubmitPurchase",
+  props: {
+    totalCost: {
+      type: Number,
+      required: true,
+    },
+  },
+  setup(props) {
+    const submitPurchaseResume = ref<SubmitPurchase>({
+      orderTaxPercentage: 0.00,
+      discount: 0.00,
+      shippingCost: 0.00,
+      grandTotal: 0.00,
+    });
+
+    const orderTax = computed(() => {
+      return props.totalCost * submitPurchaseResume.value.orderTaxPercentage / 100;
+    });
+    const grandTotal = computed(() => {
+      return props.totalCost + orderTax.value + submitPurchaseResume.value.shippingCost - submitPurchaseResume.value.discount;
+    })
+
+    return {
+      submitPurchaseResume,
+      orderTax,
+      grandTotal
+    };
+  }
 };
 </script>
