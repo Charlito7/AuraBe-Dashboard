@@ -141,7 +141,7 @@ export default {
       required: true,
     },
   },
-  setup(props) {
+  setup(props:any) {
     const submitPurchaseResume = ref<SubmitPurchase>({
       orderTaxPercentage: 0.00,
       discount: 0.00,
