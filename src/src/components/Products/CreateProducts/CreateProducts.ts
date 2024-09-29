@@ -23,6 +23,10 @@ export default defineComponent({
     const expiryDate = ref("1970-01-01");
     const productDescription = ref("");
 
+    // New fields for return acceptance
+    const isReturnAccepted = ref(false);
+    const returnTimeAccepted = ref(0); // In hours
+
     // Define the categories array
     const categories = ref<Category[]>([]);
 
@@ -50,6 +54,8 @@ export default defineComponent({
       minimumReorderQuantity.value = 0;
       expiryDate.value = "1970-01-01";
       productDescription.value = "";
+      isReturnAccepted.value = false;
+      returnTimeAccepted.value = 0;
     };
 
     // Close alert function
@@ -68,6 +74,8 @@ export default defineComponent({
         quantity: productQuantity.value,
         price: productPrice.value,
         minimumReorderQuantity: minimumReorderQuantity.value,
+        isReturnAccepted: isReturnAccepted.value, // New field
+        returnTimeAccepted: returnTimeAccepted.value, // New field
       };
 
       try {
@@ -96,6 +104,8 @@ export default defineComponent({
       minimumReorderQuantity,
       expiryDate,
       productDescription,
+      isReturnAccepted, // New field
+      returnTimeAccepted, // New field
       categories,
       submitProduct,
       alertMessage,

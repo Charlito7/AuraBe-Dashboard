@@ -106,7 +106,35 @@
               />
             </div>
           </div>
+          <!-- Is Return Accepted Field -->
+          <div class="col-lg-6">
+            <div class="form-group mb-25">
+              <label class="d-block fs-14 text-black mb-2">Is Return Accepted</label>
+              <select
+                v-model="isReturnAccepted"
+                class="bg-white border-0 rounded-1 fs-14 text-optional"
+                required
+              >
+                <option :value="true">Yes</option>
+                <option :value="false">No</option>
+              </select>
+            </div>
+          </div>
 
+          <!-- Return Time Accepted Field -->
+          <div class="col-lg-6">
+            <div class="form-group mb-25">
+              <label class="d-block fs-14 text-black mb-2">Return Time Accepted (Hours)</label>
+              <input
+                v-model="returnTimeAccepted"
+                type="number"
+                class="w-100 d-block shadow-none fs-14 bg-white rounded-1 text-title"
+                placeholder="Enter Return Time in Hours"
+                min="0"
+                required
+              />
+            </div>
+          </div>
           <div class="col-lg-12">
             <div class="form-group mb-25">
               <label class="d-block fs-14 text-black mb-2">Notes</label>
