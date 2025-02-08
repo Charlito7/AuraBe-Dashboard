@@ -4,37 +4,6 @@
   <div class="main-content bg_gray d-flex flex-column transition overflow-hidden">
     <BreadcrumbMenu pageTitle="Create Sales" />
     <div class="row mb-40">
-      <div class="col-lg-4">
-        <div class="form-group mb-25">
-    <label class="d-block fs-14 text-black mb-2">Date</label>
-    <div class="d-flex align-items-center">
-      <input 
-        type="text" 
-        class="w-100 h-55 bg_ash border-0 rounded-1 fs-14 text-black bg-white" 
-        :value="todayDate" 
-        readonly
-      />
-      <span class="ms-2">
-        <i class="fas fa-edit fs-16" @click="editDate"></i> <!-- Edit icon using FontAwesome -->
-      </span>
-    </div>
-  </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="form-group mb-25">
-          <label class="d-block fs-14 text-black mb-2">Customer Code</label>
-          <select class="bg-white border-0 rounded-1 fs-14 text-optional">
-            <option value="0">John Victim</option>
-            <option value="1">Tony Stark</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="form-group mb-25">
-          <label class="d-block fs-14 text-black mb-2">Customer Name</label>
-          <input type="text" class="w-100 h-55 bg_ash border-0 rounded-1 fs-14 text-black bg-white" />
-        </div>
-      </div>
       <div class="col-12">
         <div class="form-group">
           <label class="d-block fs-14 text-black mb-2">Choose Product</label>
@@ -76,12 +45,6 @@
                   QUANTITY
                 </th>
                 <th scope="col" class="text-title fw-normal fs-14 pt-0 ls-1">
-                  DISCOUNT
-                </th>
-                <th scope="col" class="text-title fw-normal fs-14 pt-0 ls-1">
-                  TAX
-                </th>
-                <th scope="col" class="text-title fw-normal fs-14 pt-0 ls-1">
                   SUBTOTAL
                 </th>
                 <th scope="col" class="text-title fw-normal fs-14 pt-0 ls-1 text-end pe-0">
@@ -117,12 +80,6 @@
                       class="count" @change="onQuantityChange(product)" />
                     <button class="minusBtn" @click="increment(product)"></button>
                   </div>
-                </td>
-                <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
-                  $ {{ 0 }}
-                </td>
-                <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
-                  $ {{ 0 }}
                 </td>
                 <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
                   $ {{ formatNumber(product.salesQuantity * product.price) }}
