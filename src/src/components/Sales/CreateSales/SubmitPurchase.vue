@@ -139,7 +139,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, PropType } from 'vue';
 import SalesShippingModal from './SalesShippingModal.vue';
 
 interface SubmitPurchase {
@@ -156,6 +156,18 @@ interface SubmitPurchase {
   returnAmount: number;
 }
 
+interface Product {
+  id: string;
+  name: string; // Name is required, based on the validation attribute in your C# class
+  description: string;
+  barCode?: string; // Optional field, represented with ?
+  categoryName?: string; // Optional field, represented with ?
+  expiredDate: Date;
+  quantity: number;
+  price: number;
+  minimumReorderQuantity: number;
+  salesQuantity: number;
+}
 export default {
   name: "SubmitPurchase",
   components: {
@@ -167,9 +179,9 @@ export default {
       required: true,
     },
     products: {
-      type: Array,
+      type: Array as PropType<Product[]>,
       required: true,
-    },
+    }
   },
   setup(props: any) {
     const submitPurchaseResume = ref<SubmitPurchase>({
@@ -185,7 +197,6 @@ export default {
       cash: 0.00,
       returnAmount: 0.00
     });
-
     //const cash = ref(0.00); // New cash input
     const methodOfPayment = ref("Cash");
     const total = props.totalCost;
