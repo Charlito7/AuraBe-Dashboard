@@ -3,6 +3,7 @@
   <MainSidebar />
   <div class="main-content bg_gray d-flex flex-column transition overflow-hidden">
     <BreadcrumbMenu pageTitle="Create Sales" />
+
     <div class="row mb-40">
       <div class="col-12">
         <div class="form-group">
@@ -15,6 +16,12 @@
               @click="searchProduct">
               <img src="../../assets/img/icons/search.svg" alt="Search Icon" />
             </button>
+            <!-- Suggestions Dropdown -->
+  <ul v-if="suggestions.length" class="suggestions-dropdown">
+    <li v-for="product in suggestions" :key="product.suggestion" @click="selectProduct(product)">
+      {{ product.suggestion }}
+    </li>
+  </ul>
           </div>
         </div>
       </div>
@@ -119,7 +126,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent, ref, watch } from "vue";
 import axios from "axios";
 
 import MainHeader from "../../components/Layouts/MainHeader.vue";
@@ -127,6 +134,7 @@ import MainSidebar from "../../components/Layouts/MainSidebar.vue";
 import BreadcrumbMenu from "../../components/Common/BreadcrumbMenu.vue";
 import SubmitPurchase from "../../components/Sales/CreateSales/SubmitPurchase.vue";
 import MainFooter from "../../components/Layouts/MainFooter.vue";
+import { debounce } from "lodash";
 
 
 // Define the Product interface
@@ -142,7 +150,9 @@ interface Product {
   minimumReorderQuantity: number;
   salesQuantity: number;
 }
-
+interface SuggestionsResponse{
+  suggestion: string
+}
 export default defineComponent({
   name: "CreateSalesPage",
   components: {
@@ -155,7 +165,44 @@ export default defineComponent({
   setup() {
     const barcode = ref('');
     const products = ref<Product[]>([]); // Define an array to store products
+    const suggestions = ref<SuggestionsResponse[]>([]); // Store product suggestions
+    const loadingSuggestions = ref(false);
 
+     // Function to fetch product suggestions
+    const fetchSuggestions = async (searchTerm: string) => {
+      if (!searchTerm) {
+        suggestions.value = [];
+        return;
+      }
+
+      try {
+        loadingSuggestions.value = true;
+        const response = await axios.post(`http://localhost:5254/api/products/suggestions/get?userInput=${searchTerm}`);
+        suggestions.value = response.data; 
+      } catch (error) {
+        console.error("Error fetching suggestions:", error);
+       suggestions.value = [];
+
+      } finally {
+        loadingSuggestions.value = false;
+      }
+    };
+
+    // Debounced version of fetchSuggestions
+    const debouncedFetchSuggestions = debounce(fetchSuggestions, 500);
+
+    // Watch for changes in barcode input
+    watch(barcode, (newVal) => {
+      debouncedFetchSuggestions(newVal);
+    });
+
+    // Function to handle product selection from suggestions
+    const selectProduct = async (suggestion: SuggestionsResponse) => {
+      barcode.value = suggestion.suggestion.split(' - ')[1];
+      suggestions.value = []; 
+     await searchProduct();
+    };
+   
     const searchProduct = async () => {
       if (!barcode.value) {
         alert('Please enter a product code.');
@@ -166,6 +213,8 @@ export default defineComponent({
         const response = await axios.post('http://localhost:5254/api/products/GetProductByBarCode', {
           value: barcode.value
         });
+        //remove the value on Search bar
+        barcode.value = '';
         const existingProduct = products.value.find(p => p.barCode === response.data.result.barCode);
 
         if (existingProduct) {
@@ -258,6 +307,9 @@ export default defineComponent({
       quantity,
       totalCost,
       todayDate,
+      suggestions,
+      loadingSuggestions,
+      selectProduct,
       increment,
       decrement,
       searchProduct,
@@ -269,3 +321,31 @@ export default defineComponent({
   }
 });
 </script>
+
+<style scoped>
+.suggestions-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.suggestions-dropdown li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.suggestions-dropdown li:hover {
+  background: #f0f0f0;
+}
+</style>

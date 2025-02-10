@@ -19,6 +19,7 @@
     "bootstrap-vue-next": "^0.7.3",
     "core-js": "^3.8.3",
     "dotenv": "^16.4.5",
+    "lodash": "^4.17.21",
     "nuxt": "^3.10.3",
     "swiper": "^10.1.0",
     "vue": "^3.3.8",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@types/aos": "^3.0.7",
+    "@types/lodash": "^4.17.15",
     "@types/webpack-env": "^1.18.5",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
