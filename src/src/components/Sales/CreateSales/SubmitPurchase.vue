@@ -1,7 +1,8 @@
 <template>
   <div class="row mb-40">
+ 
     <div class="col-xxl-10 col-lg-8 pe-xxl-8">
-  <div class="card border-0 rounded-1 w-xxl-5 pt-12 pb-12 mb-md-25">
+  <div class="card border-0 rounded-1">
     <form class="p-4">
       <h6 class="fs-18 mb-35 text-title fw-semibold">
           Payment Infos

@@ -135,6 +135,7 @@ import BreadcrumbMenu from "../../components/Common/BreadcrumbMenu.vue";
 import SubmitPurchase from "../../components/Sales/CreateSales/SubmitPurchase.vue";
 import MainFooter from "../../components/Layouts/MainFooter.vue";
 import { debounce } from "lodash";
+import api from "@/services/api";
 
 
 // Define the Product interface
@@ -177,7 +178,7 @@ export default defineComponent({
 
       try {
         loadingSuggestions.value = true;
-        const response = await axios.post(`http://localhost:5254/api/products/suggestions/get?userInput=${searchTerm}`);
+        const response = await api.post(`/api/products/suggestions/get?userInput=${searchTerm}`);
         suggestions.value = response.data; 
       } catch (error) {
         console.error("Error fetching suggestions:", error);
@@ -210,7 +211,7 @@ export default defineComponent({
       }
 
       try {
-        const response = await axios.post('http://localhost:5254/api/products/GetProductByBarCode', {
+        const response = await api.post('/api/products/GetProductByBarCode', {
           value: barcode.value
         });
         //remove the value on Search bar
