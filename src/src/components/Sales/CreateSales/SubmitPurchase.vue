@@ -3,7 +3,7 @@
  
     <div class="col-xxl-10 col-lg-8 pe-xxl-8">
   <div class="card border-0 rounded-1">
-    <form class="p-4">
+    <form class="p-4" @submit.prevent="submitSales">
       <h6 class="fs-18 mb-35 text-title fw-semibold">
           Payment Infos
         </h6>
@@ -44,7 +44,7 @@
                 <label for="customerId" class="form-label">Customer ID</label>
               </div>
               <div class="col-8">
-                <input type="text" class="form-control" id="customerId" name="customerId" placeholder="Enter Customer ID" >
+                <input type="text" v-model="submitPurchaseResume.customerID"  class="form-control" id="customerId" name="customerId" placeholder="Enter Customer ID" >
               </div>
             </div>
 
@@ -53,7 +53,7 @@
                 <label for="customerName" class="form-label">Customer Name</label>
               </div>
               <div class="col-8">
-                <input type="text" class="form-control" id="customerName" name="customerName" placeholder="Enter Customer Name">
+                <input type="text" v-model="submitPurchaseResume.customerName" class="form-control" id="customerName" name="customerName" placeholder="Enter Customer Name">
               </div>
             </div>
           </div>
@@ -129,10 +129,11 @@
 
     <div class="col-xl-4">
       <button
-        class="btn style-one d-inline-block transition border-0 fw-medium text-white rounded-1 fs-md-15 fs-lg-16 mb-20"
-        type="submit">
-        Submit Sales
-      </button>
+  @click.prevent="submitSales"
+  class="btn style-one d-inline-block transition border-0 fw-medium text-white rounded-1 fs-md-15 fs-lg-16 mb-20"
+>
+  Submit Sales
+</button>
     </div>
 
   </div>
@@ -142,6 +143,7 @@
 <script lang="ts">
 import { ref, computed, watch, PropType } from 'vue';
 import SalesShippingModal from './SalesShippingModal.vue';
+import api from '@/services/api';
 
 interface SubmitPurchase {
   discount: number;
@@ -155,6 +157,8 @@ interface SubmitPurchase {
   delivery: string;
   cash: number;
   returnAmount: number;
+  customerID: string;
+  customerName: string;
 }
 
 interface Product {
@@ -168,6 +172,28 @@ interface Product {
   price: number;
   minimumReorderQuantity: number;
   salesQuantity: number;
+}
+
+interface SalesMetadata {
+  discount: number;
+  notes: string;
+  cashReceived: number;
+  paymentType: string;
+  paymentCustomerName: string;
+  paymentTypeTransactionID: string;
+}
+
+interface ProductSale {
+  productCode: string;
+  productName: string;
+  unitCost: number;
+  quantity: number;
+  discount: number;
+}
+
+interface SalesData {
+  salesMetadata: SalesMetadata;
+  productSales: ProductSale[];
 }
 export default {
   name: "SubmitPurchase",
@@ -196,11 +222,16 @@ export default {
       deliveryCode: "",
       delivery: "standard",
       cash: 0.00,
-      returnAmount: 0.00
+      returnAmount: 0.00,
+      customerID:"",
+      customerName:""
     });
     //const cash = ref(0.00); // New cash input
     const methodOfPayment = ref("Cash");
-    const total = props.totalCost;
+    //const total = props.totalCost;
+    const total = computed(() => {
+      return props.totalCost;
+    });
     const grandTotal = computed(() => {
       return props.totalCost + submitPurchaseResume.value.shippingCost - submitPurchaseResume.value.discount;
     });
@@ -253,6 +284,40 @@ watch(() => submitPurchaseResume.value.cash, (newVal) => {
       submitPurchaseResume.value.delivery = shippingInfo.delivery;
     };
 
+    const submitSales = async () => {
+      const salesData: SalesData = {
+        salesMetadata: {
+          discount: submitPurchaseResume.value.discount,
+          notes: submitPurchaseResume.value.notes,
+          cashReceived: submitPurchaseResume.value.cash,
+          paymentType: methodOfPayment.value,
+          paymentCustomerName: submitPurchaseResume.value.customerName,
+          paymentTypeTransactionID: submitPurchaseResume.value.customerID,
+        },
+        productSales: props.products.map((product: Product) => ({
+          productCode: product.barCode,
+          productName: product.name,
+          unitCost: product.price,
+          quantity: product.salesQuantity,
+          discount: 0, // Assuming no discount per product
+        })),
+      };
+
+      try {
+        const response = await api.post('/api/sales/CreateSales', salesData);
+
+        if (!response) {
+          throw new Error("Failed to submit sales data");
+        }
+
+        alert("Sales submitted successfully!");
+      } catch (error) {
+        console.error("Error submitting sales:", error);
+        alert("Failed to submit sales data. Please try again.");
+      }
+    };
+
+
     return {
       submitPurchaseResume,
       grandTotal,
@@ -261,7 +326,8 @@ watch(() => submitPurchaseResume.value.cash, (newVal) => {
       returnAmount,
       updateDiscount,
       updateShippingInfo,
-      methodOfPayment
+      methodOfPayment,
+      submitSales
     };
   },
 };
