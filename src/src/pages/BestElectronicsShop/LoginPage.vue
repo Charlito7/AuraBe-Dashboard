@@ -5,7 +5,7 @@
       <div class="login-form">
         <router-link to="/" class="logo">
           <img
-            src="../../assets/img/logo.webp"
+            src="../../assets/img/aurabe-logo.png"
             alt="Image"
             class="d-block mx-auto"
           />
@@ -47,6 +47,7 @@
 import { ref } from 'vue'; // Import ref for reactive data
 import axios from 'axios';
 import { useRouter } from 'vue-router';
+import { forEach } from 'lodash';
 
 interface LoginData {
   username: string;
@@ -56,7 +57,9 @@ interface LoginResponse {
   message: string;
   result:{
     "token":"",
-    "refreshToken":""
+    "refreshToken":"",
+    "fullName":"",
+    "userRoles":""
   };
 }
 
@@ -74,14 +77,21 @@ export default {
         const response = await axios.post<LoginResponse>(process.env.VUE_APP_LOGIN_URI, formData); // Define type for response
 
         // Handle successful login
-        sessionStorage.setItem('token', response.data.result.token); 
-        console.log('Login successful!', response.data);
-        router.push('/pos');
-        // Replace with navigation logic (e.g., router.push('/home'))
+        const user = {
+          fullName: response.data.result.fullName,
+          roles: Array.isArray(response.data.result.userRoles) 
+    ? response.data.result.userRoles.join("/") 
+    : ""
+        } 
+
+        sessionStorage.setItem('token', response.data.result.token);
+        sessionStorage.setItem('user', JSON.stringify(user));
+        const redirectUrl = sessionStorage.getItem("redirectAfterLogin") || "/";
+        sessionStorage.removeItem("redirectAfterLogin"); 
+        router.push(redirectUrl);
       } catch (error) {
         // Handle login errors
-        console.error('Login failed:', error);
-        // Display error message (e.g., this.errorMessage = error.response.data)
+        console.error('Login failed:');
       }
     };
 

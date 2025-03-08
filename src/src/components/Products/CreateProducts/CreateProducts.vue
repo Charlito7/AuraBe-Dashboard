@@ -8,7 +8,7 @@
     </div>
 
     <div class="row">
-      <div class="col-xxl-9 col-xl-8 col-lg-8 pe-xxl-6 mb-md-25">
+      <div class="col-xxl-12 col-xl-12 col-lg-12 pe-xxl-12 mb-md-25">
         <div class="row gx-xxl-6">
           <!-- Form Fields -->
           <div class="col-lg-6">
@@ -159,9 +159,11 @@
         </div>
       </div>
 
-      <div class="col-xxl-3 col-xl-4 col-lg-4">
+     <!--
+ <div class="col-xxl-3 col-xl-4 col-lg-4">
         <AddImages />
       </div>
+      -->
     </div>
   </form>
 </template>

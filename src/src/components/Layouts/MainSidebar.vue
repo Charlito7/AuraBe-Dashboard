@@ -29,7 +29,7 @@
                 Product List
               </router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" v-if="hasRole('ITAdmin')">
               <router-link to="/print-barcode">
                 <img src="../../assets/img/icons/barcode.svg" alt="Image" />
                 Print Barcode
@@ -37,7 +37,7 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="hasRole('ITAdmin')">
           <a href="javascript:void(0)" class="nav-link">
             <img src="../../assets/img/icons/adjustments.svg" alt="Image" />
             <span class="nav-text d-block fs-14"> Adjustments </span>
@@ -57,7 +57,7 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="hasRole('ITAdmin')">
           <a href="javascript:void(0)" class="nav-link">
             <img src="../../assets/img/icons/transfer.svg" alt="Image" />
             <span class="nav-text d-block fs-14"> Transfer </span>
@@ -77,7 +77,7 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="hasRole('ITAdmin')">
           <a href="javascript:void(0)" class="nav-link">
             <img src="../../assets/img/icons/expenses.svg" alt="Image" />
             <span class="nav-text d-block fs-14"> Expenses </span>
@@ -106,7 +106,7 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="hasRole('ITAdmin')">
           <a href="javascript:void(0)" class="nav-link">
             <img src="../../assets/img/icons/quotation.svg" alt="Image" />
             <span class="nav-text d-block fs-14"> Quotations </span>
@@ -126,7 +126,7 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="hasRole('ITAdmin')">
           <a href="javascript:void(0)" class="nav-link">
             <img src="../../assets/img/icons/purchase.svg" alt="Image" />
             <span class="nav-text d-block fs-14"> Purchases </span>
@@ -164,13 +164,13 @@
                 Sales List
               </router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" v-if="hasRole('ITAdmin')">
               <router-link to="/pos">
                 <img src="../../assets/img/icons/item-list.svg" alt="Image" />
                 POS
               </router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" v-if="hasRole('ITAdmin')">
               <router-link to="/shipment-list">
                 <img src="../../assets/img/icons/item-list.svg" alt="Image" />
                 Shipment
@@ -178,7 +178,7 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="hasRole('ITAdmin')">
           <a href="javascript:void(0)" class="nav-link">
             <img src="../../assets/img/icons/sales-return.svg" alt="Image" />
             <span class="nav-text d-block fs-14"> Sales Return </span>
@@ -198,7 +198,7 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="hasRole('ITAdmin')">
           <a href="javascript:void(0)" class="nav-link">
             <img src="../../assets/img/icons/purchase-return.svg" alt="Image" />
             <span class="nav-text d-block fs-14"> Purchase Return </span>
@@ -210,7 +210,7 @@
                 Create Purchase Return
               </router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" >
               <router-link to="/purchase-return-list">
                 <img src="../../assets/img/icons/item-list.svg" alt="Image" />
                 Purchase Return List
@@ -218,7 +218,7 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="hasRole('ITAdmin')">
           <a href="javascript:void(0)" class="nav-link">
             <img src="../../assets/img/icons/adjustments.svg" alt="Image" />
             <span class="nav-text d-block fs-14"> People </span>
@@ -247,13 +247,13 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="hasRole('ITAdmin')">
           <a href="javascript:void(0)" class="nav-link">
             <img src="../../assets/img/icons/setting-2.svg" alt="Image" />
             <span class="nav-text d-block fs-14"> Settings </span>
           </a>
           <ul class="sidebar-secondary-menu bg-white list-style">
-            <li class="nav-item">
+            <li class="nav-item" >
               <router-link to="/system-settings">
                 <img src="../../assets/img/icons/setting-3.svg" alt="Image" />
                 System Settings
@@ -303,7 +303,7 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="hasRole('ITAdmin')">
           <a href="javascript:void(0)" class="nav-link">
             <img src="../../assets/img/icons/reports.svg" alt="Image" />
             <span class="nav-text d-block fs-14"> Reports </span>
@@ -427,6 +427,25 @@
 <script>
 export default {
   name: "MainSidebar",
+  computed: {
+    userRoles() {
+      const storedUser = sessionStorage.getItem("user");
+      if (storedUser) {
+        try {
+          const userObject = JSON.parse(storedUser);
+          return userObject.roles ? userObject.roles.split("/") : []; // Convert roles to array
+        } catch (error) {
+          console.error("Error parsing user data:", error);
+        }
+      }
+      return [];
+    },
+  },
+  methods: {
+    hasRole(role) {
+      return this.userRoles.includes(role);
+    },
+  },
 };
 </script>
 

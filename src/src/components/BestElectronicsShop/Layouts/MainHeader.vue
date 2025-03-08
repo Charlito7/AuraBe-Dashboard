@@ -10,7 +10,7 @@
             <router-link to="/" class="logo">
               <img
                 class="logo-light"
-                src="../../../assets/img/logo.webp"
+                src="../../../assets/img/aurabe-logo.png"
                 alt="Image"
               />
               <img
@@ -145,8 +145,8 @@
                 >
                   <img src="../../../assets/img/admin.webp" alt="admin" />
                   <span class="md-none">
-                    <span class="d-block fw-bold text-title">Andrew Smith</span>
-                    <span class="text-paragraph fs-14">User</span>
+                    <span class="d-block fw-bold text-title">{{ userFullName }}</span>
+                    <span class="text-paragraph fs-14">{{ userRoles }}</span>
                   </span>
                 </button>
                 <div class="dropdown-menu top-1 shadow-none border-0">
@@ -215,19 +215,36 @@ export default defineComponent({
   },
   setup() {
     const isSticky = ref(false);
+    const userFullName = ref("Andrew Smith"); // Default name
+    const userRoles = ref("User"); // Default role
 
     onMounted(() => {
       window.addEventListener("scroll", () => {
         let scrollPos = window.scrollY;
         isSticky.value = scrollPos >= 100;
       });
+
+      // Retrieve user data from sessionStorage
+      const storedUser = sessionStorage.getItem("user");
+      if (storedUser) {
+        try {
+          const userObject = JSON.parse(storedUser);
+          userFullName.value = userObject.fullName || "";
+          userRoles.value = userObject.roles || "";
+        } catch (error) {
+          console.error("Error parsing user data:", error);
+        }
+      }
     });
 
     return {
       isSticky,
+      userFullName,
+      userRoles,
     };
   },
 });
+
 </script>
 
 <style lang="scss" scoped>

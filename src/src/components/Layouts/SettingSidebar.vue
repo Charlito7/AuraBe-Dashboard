@@ -14,7 +14,7 @@
     </button>
     <div class="offcanvas-body p-0">
       <router-link to="/" class="logo">
-        <img src="../../assets/img/logo.webp" alt="Image" class="logo-light" />
+        <img src="../../assets/img/aurabe-logo.png" alt="Image" class="logo-light" />
         <img
           src="../../assets/img/logo-white.webp"
           alt="Image"

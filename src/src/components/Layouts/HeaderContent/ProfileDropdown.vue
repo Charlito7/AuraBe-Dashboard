@@ -8,8 +8,8 @@
     >
       <img src="../../../assets/img/admin.webp" alt="admin" />
       <span class="md-none">
-        <span class="d-block fw-bold text-title">Andrew Smith</span>
-        <span class="text-paragraph fs-14">Admin</span>
+        <span class="d-block fw-bold text-title">{{ userFullName }}</span>
+        <span class="text-paragraph fs-14">{{ userRoles }}</span>
       </span>
     </button>
     <div class="dropdown-menu top-1 shadow-none border-0">
@@ -33,9 +33,33 @@
 </template>
 
 <script>
-export default {
+import { defineComponent, ref, onMounted } from "vue";
+
+export default defineComponent({
   name: "ProfileDropdown",
-};
+  setup() {
+    const userFullName = ref(""); // Default name
+    const userRoles = ref(""); // Default role
+
+    onMounted(() => {
+      const storedUser = sessionStorage.getItem("user");
+      if (storedUser) {
+        try {
+          const userObject = JSON.parse(storedUser);
+          userFullName.value = userObject.fullName || "";
+          userRoles.value = userObject.roles || ""; // Fallback to Admin if not found
+        } catch (error) {
+          console.error("Error parsing user data:", error);
+        }
+      }
+    });
+
+    return {
+      userFullName,
+      userRoles,
+    };
+  },
+});
 </script>
 
 <style lang="scss" scoped>

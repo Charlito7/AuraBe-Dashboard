@@ -74,6 +74,8 @@ import TermsConditionsPage from "../pages/BestElectronicsShop/TermsConditionsPag
 import OfferPage from "../pages/BestElectronicsShop/OfferPage.vue";
 import FaqPage from "../pages/BestElectronicsShop/FaqPage.vue";
 import ContactPage from "../pages/BestElectronicsShop/ContactPage.vue";
+import NotFoundPage from "../pages/NotFound/NotFoundPage.vue";
+
 
 import { tokenVerification, roleVerification } from "@/services/users";
 
@@ -83,314 +85,380 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "DashboardPage",
     component: DashboardPage,
+    meta: { requiresAuth: true, roles: ["Admin", "MANAGER","ITAdmin"] }
+  },
+  {
+    path: "/:pathMatch(.*)*", // Catch-all route for bad URLs
+    name: "NotFound",
+    component: NotFoundPage
   },
   {
     path: "/create-product",
     name: "CreateProductsPage",
     component: CreateProductsPage,
-    meta: { requiresAuth: true, roles: ["xdmin", "MANAGER"] }
+    meta: { requiresAuth: true, roles: ["User", "MANAGER"] }
   },
   {
     path: "/product-list",
     name: "ProductsListPage",
     component: ProductsListPage,
+    meta: { requiresAuth: true, roles: ["User", "MANAGER"] }
   },
   {
     path: '/edit-product/:id',
     name: 'EditProduct',
     component: EditProductsPage, // Assuming you have a component for editing products
     props: true,
+    meta: { requiresAuth: true, roles: ["User", "MANAGER"] }
   },
   {
     path: '/product-details/:id',
     name: 'ProductDetails',
     component: ProductDetailsPage, // or import it dynamically if needed
     props: true, // allows the id to be passed as a prop
+    meta: { requiresAuth: true, roles: ["User", "MANAGER"] }
   },
   {
     path: "/print-barcode",
     name: "PrintBarcodePage",
     component: PrintBarcodePage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/create-adjustment",
     name: "CreateAdjustmentsPage",
     component: CreateAdjustmentsPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/adjustment-list",
     name: "AdjustmentListPage",
     component: AdjustmentListPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/edit-adjustment",
     name: "EditAdjustmentPage",
     component: EditAdjustmentPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/create-transfer",
     name: "CreateTransferPage",
     component: CreateTransferPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/transfer-list",
     name: "TransferListPage",
     component: TransferListPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/edit-transfer",
     name: "EditTransferPage",
     component: EditTransferPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/create-expense",
     name: "CreateExpensesPage",
     component: CreateExpensesPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/expense-list",
     name: "ExpensesListPage",
     component: ExpensesListPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/edit-expense",
     name: "EditExpensesPage",
     component: EditExpensesPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/expense-category",
     name: "ExpenseCategoryPage",
     component: ExpenseCategoryPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/create-quotation",
     name: "CreateQuotationPage",
     component: CreateQuotationPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/quotation-list",
     name: "QuotationListPage",
     component: QuotationListPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/edit-quotation",
     name: "EditQuotationPage",
     component: EditQuotationPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/create-purchase",
     name: "CreatePurchasePage",
     component: CreatePurchasePage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/purchase-list",
     name: "PurchaseListPage",
     component: PurchaseListPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/edit-purchase",
     name: "EditPurchasePage",
     component: EditPurchasePage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/create-sales",
     name: "CreateSalesPage",
     component: CreateSalesPage,
+    meta: { requiresAuth: true, roles: ["User"] }
   },
   {
     path: "/sales-list",
     name: "SalesListPage",
     component: SalesListPage,
+    meta: { requiresAuth: true, roles: ["User"] }
   },
   {
     path: "/edit-sales",
     name: "EditSalesPage",
     component: EditSalesPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/pos",
     name: "PosPage",
     component: PosPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/shipment-list",
     name: "ShipmentPage",
     component: ShipmentPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/create-sales-return",
     name: "CreateSalesReturnPage",
     component: CreateSalesReturnPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/sales-return-list",
     name: "SalesReturnListPage",
     component: SalesReturnListPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/edit-sales-return",
     name: "EditSalesReturnPage",
     component: EditSalesReturnPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/create-purchase-return",
     name: "CreatePurchaseReturnPage",
     component: CreatePurchaseReturnPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/purchase-return-list",
     name: "PurchaseReturnListPage",
     component: PurchaseReturnListPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/edit-purchase-return",
     name: "EditPurchaseReturnPage",
     component: EditPurchaseReturnPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/customer-list",
     name: "CustomerListPage",
     component: CustomerListPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/supplier-list",
     name: "SupplierListPage",
     component: SupplierListPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/user-list",
     name: "UserListPage",
     component: UserListPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/system-settings",
     name: "SystemSettingsPage",
     component: SystemSettingsPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/my-profile",
     name: "MyProfilePage",
     component: MyProfilePage,
+    meta: { requiresAuth: true, roles: ["User"] }
   },
   {
     path: "/group-permission",
     name: "GroupPermissionPage",
     component: GroupPermissionPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/create-group-permission",
     name: "CreateGroupPermissionPage",
     component: CreateGroupPermissionPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/edit-group-permission",
     name: "EditGroupPermissionPage",
     component: EditGroupPermissionPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/warehouse-list",
     name: "WarehousePage",
     component: WarehousePage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/category-list",
     name: "CategoryPage",
     component: CategoryPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/brand-list",
     name: "BrandListPage",
     component: BrandListPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/currency-list",
     name: "CurrncyListPage",
     component: CurrncyListPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/unit-list",
     name: "UnitListPage",
     component: UnitListPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/backup",
     name: "BackupPage",
     component: BackupPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/purchase-report",
     name: "PurchaseReportPage",
     component: PurchaseReportPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/purchase-payment-report",
     name: "PurchasePaymentReportPage",
     component: PurchasePaymentReportPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/purchase-return-report",
     name: "PurchaseReturnReportPage",
     component: PurchaseReturnReportPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/sales-report",
     name: "SalesReportPage",
     component: SalesReportPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/sales-payment-report",
     name: "SalesPaymentReportPage",
     component: SalesPaymentReportPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/sales-return-report",
     name: "SalesReturnReportPage",
     component: SalesReturnReportPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/product-quantity-alert",
     name: "ProductQuantityAlertPage",
     component: ProductQuantityAlertPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/profit-loss",
     name: "ProfitLossPage",
     component: ProfitLossPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/product-report",
     name: "ProductReportPage",
     component: ProductReportPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/stock-report",
     name: "StockReportPage",
     component: StockReportPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/stock-report-details",
     name: "StockReportDetailsPage",
     component: StockReportDetailsPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/warehouse-report",
     name: "WarehouseReportPage",
     component: WarehouseReportPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/customer-report",
     name: "CustomerReportPage",
     component: CustomerReportPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/supplier-report",
     name: "SupplierReportPage",
     component: SupplierReportPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
     path: "/user-report",
     name: "UserReportPage",
     component: UserReportPage,
+    meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   { path: "/landing-page", name: "LandingPage", component: LandingPage },
   { path: "/shop-right-sidebar", name: "ShopRightSidebarPage", component: ShopRightSidebarPage },
@@ -427,22 +495,17 @@ router.beforeEach(async (to, from, next) => {
     if (token != null){
       await tokenVerification().then(response => {
         if (response.status == 200 ) {
-          // Response is successful
-          console.log("Request was successful");
            isAuthenticated = true;
-          // Handle the response data here
         } else {
-          // Response is not successful
-          console.error("Request failed with status: " + response.status);
+          console.error("Request failed");
         }
       }).catch(error => {
-        // Handle request error
         console.error("Error occurred during request:", error);
       });
     }
 
     if (!isAuthenticated) {
-      // Redirect to login page if not authenticated
+      sessionStorage.setItem("redirectAfterLogin", to.fullPath);
       return next({ name: 'LoginPage' });
     }
 
@@ -454,12 +517,11 @@ router.beforeEach(async (to, from, next) => {
       hasPermission = true;
      }
     } else {
-      console.error("Roles must be an array");
+      console.error("Bad request");
     }
    
     if (hasPermission == false) {
-      // Redirect to unauthorized page or display error message
-      return next('/unauthorized');
+      return next('/login');
     }
   }
   // If authentication and permissions are valid, proceed to the route

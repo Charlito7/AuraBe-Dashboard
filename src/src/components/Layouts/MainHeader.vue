@@ -7,7 +7,7 @@
             <router-link to="/" class="logo">
               <img
                 class="logo-light"
-                src="../../assets/img/logo.webp"
+                src="../../assets/img/aurabe-logo.png"
                 alt="Image"
               />
               <img
