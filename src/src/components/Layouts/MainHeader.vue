@@ -41,18 +41,7 @@
             class="header-right d-flex align-items-center justify-content-sm-end justify-content-between"
           >
             <div class="option-item">
-              <router-link
-                to="/pos"
-                class="pos-link rounded-1 d-inline-block lh-1 fw-semibold transition"
-              >
-                POS
-              </router-link>
-            </div>
-            <div class="option-item">
               <ToggleFullscreenBtn />
-            </div>
-            <div class="option-item">
-              <LanguageDropdown />
             </div>
             <div class="option-item">
               <NotificationDropdown />

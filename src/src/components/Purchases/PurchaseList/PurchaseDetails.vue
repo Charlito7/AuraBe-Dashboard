@@ -82,10 +82,10 @@
               <h6 class="fs-16 fw-bold text-title mb-20">Company info:</h6>
               <ul class="details-title list-style mb-40">
                 <li class="fs-14 fw-semibold text-title lh-1">
-                  NAME :<span class="ms-1 text-optional">Pyle Corporati</span>
+                  NAME :<span class="ms-1 text-optional">KODE Corporati</span>
                 </li>
                 <li class="fs-14 fw-semibold text-title lh-1">
-                  MAIL :<span class="text-optional ms-1">hello@pyle.com</span>
+                  MAIL :<span class="text-optional ms-1">hello@KODE.com</span>
                 </li>
                 <li class="fs-14 fw-semibold text-title lh-1">
                   PHONE :<span class="text-optional ms-1">+00 793 234 609</span>

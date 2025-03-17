@@ -6,7 +6,7 @@
         <ul class="list-style">
           <li>
             <img src="../../../assets/img/icons/mail.svg" alt="Image" />
-            <a href="mailto:hello@pyle.com"> hello@pyle.com </a>
+            <a href="mailto:hello@KODE.com"> hello@KODE.com </a>
           </li>
           <li>
             <img src="../../../assets/img/icons/map.svg" alt="Image" />#867-859
@@ -25,7 +25,7 @@
         <ul class="list-style">
           <li>
             <img src="../../../assets/img/icons/mail.svg" alt="Image" />
-            <a href="mailto:hello@pyle.com"> hello@pyle.com </a>
+            <a href="mailto:hello@KODE.com"> hello@KODE.com </a>
           </li>
           <li>
             <img src="../../../assets/img/icons/map.svg" alt="Image" />127-859
@@ -44,7 +44,7 @@
         <ul class="list-style">
           <li>
             <img src="../../../assets/img/icons/mail.svg" alt="Image" />
-            <a href="mailto:hello@pyle.com"> hello@pyle.com </a>
+            <a href="mailto:hello@KODE.com"> hello@KODE.com </a>
           </li>
           <li>
             <img src="../../../assets/img/icons/map.svg" alt="Image" />3217-555

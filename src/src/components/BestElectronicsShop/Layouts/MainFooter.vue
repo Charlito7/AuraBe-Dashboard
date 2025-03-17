@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-6">
           <div class="copyright-text">
-            <span class="text-white text-bold">&copy; Pyle</span> is proudly
+            <span class="text-white text-bold">&copy; KODE</span> is proudly
             owned by
             <a href="https://hibootstrap.com/" class="text-white text-bold">
               HiBootstrap
@@ -13,7 +13,7 @@
         </div>
         <div class="col-md-6">
           <p class="text-offwhite mb-0 text-md-end">
-            <span class="text-white text-bold">PYLE</span>
+            <span class="text-white text-bold">KODE</span>
             - Ultimate Inventory With
             <span class="text-white text-bold">POS</span>
           </p>

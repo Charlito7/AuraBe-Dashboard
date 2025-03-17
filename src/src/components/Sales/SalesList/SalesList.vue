@@ -5,97 +5,38 @@
         <table class="table text-nowrap align-middle mb-0">
           <thead>
             <tr>
-              <th scope="col" class="text-title fw-normal fs-14 pt-0 ps-0">
-                <div class="form-check checkbox">
-                  <input class="form-check-input" type="checkbox" id="test_1" />
-                  <label class="form-check-label" for="test_1">
-                    DATE
-                    <img
-                      class="ms-2"
-                      src="../../../assets/img/icons/up-down-aroow.svg"
-                      alt="Image"
-                    />
-                  </label>
-                </div>
-              </th>
-              <th scope="col" class="text-title fw-normal fs-14 pt-0">
-                REFERENCE
-                <img
-                  class="ms-2"
-                  src="../../../assets/img/icons/up-down-aroow.svg"
-                  alt="Image"
-                />
-              </th>
-              <th scope="col" class="text-title fw-normal fs-14 pt-0">
-                CUSTOMER
-                <img
-                  class="ms-2"
-                  src="../../../assets/img/icons/up-down-aroow.svg"
-                  alt="Image"
-                />
-              </th>
-              <th scope="col" class="text-title fw-normal fs-14 pt-0">
-                GRAND TOTAL
-                <img
-                  class="ms-2"
-                  src="../../../assets/img/icons/up-down-aroow.svg"
-                  alt="Image"
-                />
-              </th>
-              <th scope="col" class="text-title fw-normal fs-14 pt-0 pe-0">
-                ACTION
-              </th>
+              <th scope="col" class="text-title fw-normal fs-14 pt-0">DATE</th>
+              <th scope="col" class="text-title fw-normal fs-14 pt-0">SELLER</th>
+              <th scope="col" class="text-title fw-normal fs-14 pt-0">CUSTOMER</th>
+              <th scope="col" class="text-title fw-normal fs-14 pt-0">STATUS</th>
+              <th scope="col" class="text-title fw-normal fs-14 pt-0">TOTAL AMOUNT</th>
+              <th scope="col" class="text-title fw-normal fs-14 pt-0">PAYMENT TYPE</th>
+              <th scope="col" class="text-title fw-normal fs-14 pt-0 pe-0">ACTION</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="shadow-none fw-normal text-black title ps-0">
-                <div class="d-flex align-items-center">
-                  <div class="form-check checkbox style-three">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      id="test_2"
-                    />
-                    <label class="form-check-label text-optional" for="test_2">
-                    </label>
-                  </div>
-                  <span class="text-optional fs-14 ms-2">26/09/2023</span>
-                </div>
+            <tr v-for="sale in sales" :key="sale.id">
+              <td class="shadow-none text-black">{{ formatDateHT(sale.transactionDate)}}</td>
+              <td class="shadow-none">{{ sale.sellerFullName }}</td>
+              <td class="shadow-none">{{ sale.paymentCustomerName || 'N/A' }}</td>
+              <td class="shadow-none">
+                <button :class="sale.status || 'PendingDelivery'">
+                {{ sale.status || 'N/A' }}
+                </button>
               </td>
-              <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
-                5389607
-              </td>
-              <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
-                Jane Ronan
-              </td>
-              <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
-                $120.00
-              </td>
-              <td class="shadow-none lh-1 text-end pe-0">
+              <td class="shadow-none">
+                ${{ sale.totalAmount ? sale.totalAmount.toFixed(2) : '0.00' }}</td>
+                <td class="shadow-none">
+                  <button :class="sale.paymentType">
+  {{ sale.paymentType || 'N/A' }}
+</button>
+</td>
+              <td class="shadow-none text-end pe-0">
                 <div class="button-group d-flex flex-wrap align-items-center">
-                  <a
-                    href="javascript:void(0)"
-                    title="View"
-                    data-bs-toggle="modal"
-                    data-bs-target="#detailsModal"
-                  >
-                    <img src="../../../assets/img/icons/eye.svg" alt="Image" />
-                  </a>
-                  <router-link to="/edit-sales" title="Edit">
-                    <img src="../../../assets/img/icons/edit.svg" alt="Image" />
-                  </router-link>
-                  <a
-                    class="delete-btn"
-                    data-bs-toggle="offcanvas"
-                    href="#deletePopup"
-                    role="button"
-                    aria-controls="deletePopup"
-                  >
-                    <img
-                      src="../../../assets/img/icons/close.svg"
-                      alt="Image"
-                    />
+                  <a href="#" title="View" 
+                  data-bs-toggle="modal"
+                  data-bs-target="#detailsModal" @click="viewSale(sale.id)">
+                    <img src="../../../assets/img/icons/eye.svg" alt="View" />
                   </a>
                 </div>
               </td>
@@ -108,45 +49,171 @@
 
   <div class="row pb-45 align-items-center">
     <div class="col-sm-6">
-      <div
-        class="d-flex flex-wrap align-items-center justify-content-center justify-content-sm-start page-unit"
-      >
-        <span class="fs-13">Showing product per page</span>
-        <select class="text-title border-0 fs-14 bg-transparent">
-          <option value="0">10</option>
-          <option value="1">20</option>
-          <option value="2">30</option>
+      <div class="d-flex align-items-center page-unit">
+        <span class="fs-13">Showing sales per page</span>
+        <select v-model="pageSize" @change="changePageSize" class="text-title border-0 fs-14 bg-transparent">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
         </select>
       </div>
     </div>
     <div class="col-sm-6 text-sm-end text-center">
       <ul class="page-nav list-style">
         <li>
-          <a href="#">
-            <img
-              src="../../../assets/img/icons/left-arrow-purple.svg"
-              alt="Image"
-            />
+          <a @click="previousPage" :disabled="currentPage === 1">
+            <img src="../../../assets/img/icons/left-arrow-purple.svg" alt="Previous" />
           </a>
         </li>
-        <li><a href="#" class="active">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
+        <li v-for="page in visiblePages" :key="page">
+          <a @click="goToPage(page)" :class="{ active: page === currentPage }">{{ page }}</a>
+        </li>
         <li>
-          <a href="#">
-            <img
-              src="../../../assets/img/icons/right-arrow-purple.svg"
-              alt="Image"
-            />
+          <a @click="nextPage" :disabled="currentPage === totalPages">
+            <img src="../../../assets/img/icons/right-arrow-purple.svg" alt="Next" />
           </a>
         </li>
       </ul>
     </div>
+   
   </div>
+  <SalesDetails v-if="selectedSale" :saleDetails="selectedSale"/>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+import SalesDetails from "./SalesDetails.vue";
+import { formatDateHT } from "@/useful/formatDate";
+import api from "@/services/api";
+import { SalesMetadataAndProductResponseDTO } from "@/interfaces/interfaces/salesInterface";
+
+interface Sale {
+  id: string;
+  transactionDate: string;
+  sellerFullName: string;
+  paymentCustomerName?: string;
+  status: string;
+  totalAmount: number;
+  paymentType: string;
+}
+
+
+export default defineComponent({
   name: "SalesList",
-};
+  components: {
+    SalesDetails,
+  },
+  data() {
+    return {
+      sales: [] as Sale[],
+      currentPage: 1,
+      pageSize: 10,
+      totalPages: 1,
+      visiblePages: [] as number[],
+      pagesToShow: 5,
+      selectedSaleId: '',
+      selectedSale: {} as SalesMetadataAndProductResponseDTO,
+    };
+  },
+  mounted() {
+    this.fetchSales();
+  },
+
+  methods: {
+    async fetchSales() {
+      try {
+        const response = await api.post(
+          `/api/sales/GetSalesListPagination?page=${this.currentPage}&pageSize=${this.pageSize}`
+        );
+        this.sales = response.data.result.sales;
+        this.totalPages = response.data.result.pagination.totalPages;
+        this.setVisiblePages();
+      } catch {
+        console.error("Error fetching sales");
+      }
+    },
+    async fetchSaleDetails() {
+      try {
+        const response = await api.post(`/api/sales/GetSaleDetails?saleMetadataId=${this.selectedSaleId}`);
+        if (response.data && response.data.result && response.data.result.length > 0) {
+     
+    }else{
+      this.selectedSale = {} as SalesMetadataAndProductResponseDTO
+    }
+
+      } catch(error) {
+        console.error("Error fetching sales ", error);
+      }
+    },
+    setVisiblePages() {
+      const start = Math.max(1, this.currentPage - Math.floor(this.pagesToShow / 2));
+      const end = Math.min(this.totalPages, start + this.pagesToShow - 1);
+      this.visiblePages = [];
+      for (let i = start; i <= end; i++) {
+        this.visiblePages.push(i);
+      }
+    },
+    goToPage(page: number) {
+      this.currentPage = page;
+      this.fetchSales();
+    },
+    previousPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.fetchSales();
+      }
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+        this.fetchSales();
+      }
+    },
+    changePageSize() {
+      this.currentPage = 1;
+      this.fetchSales();
+    },
+    viewSale(saleId: string) {
+      this.selectedSaleId = saleId
+       this.fetchSaleDetails();
+    },
+    closeModal() {
+
+    },
+    deleteSale(id: string) {
+    },
+formatDateHT
+  },
+});
 </script>
+
+<style scoped>
+.Cash, .DELIVERED{
+  background-color: #22c55e; 
+    color: #ffffff; 
+    padding-left: 0.5rem; 
+    padding-right: 0.5rem; 
+    border-radius: 1rem;
+    border: none; 
+    outline: none;
+}
+.MonCash{
+  background-color: #a30e0e; 
+    color: #ffffff; 
+    padding-left: 0.5rem; 
+    padding-right: 0.5rem; 
+    border-radius: 1rem;
+    border: none; 
+    outline: none;
+}
+.NatCash{
+  background-color: #5008cb; 
+    color: #ffffff; 
+    padding-left: 0.5rem; 
+    padding-right: 0.5rem; 
+    border-radius: 1rem;
+    border: none; 
+    outline: none;
+}
+
+</style>

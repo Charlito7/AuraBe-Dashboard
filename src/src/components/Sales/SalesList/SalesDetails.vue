@@ -38,7 +38,7 @@
                   TIME :<span class="fw-semibold ms-1">20:31</span>
                 </li>
                 <li class="fs-14 fw-medium text-title lh-1">
-                  REFERENCE :<span class="fw-semibold ms-1">5389607</span>
+                  REFERENCE :<span class="fw-semibold ms-1">{{ saleDetails?.Id}}</span>
                 </li>
                 <li class="fs-14 fw-medium text-title lh-1">
                   WAREHOUSE :<span class="fw-semibold ms-1">Warehouse 01</span>
@@ -76,10 +76,10 @@
               <h6 class="fs-16 fw-bold text-title mb-20">Company info:</h6>
               <ul class="details-title list-style mb-40">
                 <li class="fs-14 fw-semibold text-title lh-1">
-                  NAME :<span class="ms-1 text-optional">Pyle Corporati</span>
+                  NAME :<span class="ms-1 text-optional">KODE Corporati</span>
                 </li>
                 <li class="fs-14 fw-semibold text-title lh-1">
-                  MAIL :<span class="text-optional ms-1">hello@pyle.com</span>
+                  MAIL :<span class="text-optional ms-1">hello@KODE.com</span>
                 </li>
                 <li class="fs-14 fw-semibold text-title lh-1">
                   PHONE :<span class="text-optional ms-1">+00 793 234 609</span>
@@ -373,8 +373,27 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import {SalesMetadataAndProductResponseDTO } from "@/interfaces/interfaces/salesInterface"
+import { watch } from "vue";
 export default {
   name: "SalesDetails",
+
+  props: {
+    saleDetails: {
+      type: Object as () => SalesMetadataAndProductResponseDTO,
+      required: false
+    },
+    setup(props: any) {
+    watch(
+      () => props.saleDetails,
+      (newVal) => {
+        console.log("Sale Details Updated:", newVal); // Log the new sale details
+        // You can add any additional logic here to handle the updated prop
+      },
+      { deep: true }
+    );
+  }
+  }
 };
 </script>

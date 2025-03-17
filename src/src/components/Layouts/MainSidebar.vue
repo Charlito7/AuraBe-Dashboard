@@ -11,7 +11,7 @@
             <span class="nav-text d-block fs-14 fw-light"> Dashboard </span>
           </router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="hasRole('ITAdmin')">
           <a href="javascript:void(0)" class="nav-link">
             <img src="../../assets/img/icons/products.svg" alt="Image" />
             <span class="nav-text d-block fs-14"> Products </span>
@@ -146,7 +146,7 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="hasRole('ITAdmin')">
           <a href="javascript:void(0)" class="nav-link">
             <img src="../../assets/img/icons/sale.svg" alt="Image" />
             <span class="nav-text d-block fs-14"> Sales </span>
@@ -178,6 +178,23 @@
             </li>
           </ul>
         </li>
+    
+
+
+        <li class="nav-item" v-if="hasRole('Seller')">
+          <router-link to="/create-sales" class="nav-link">
+            <img src="../../assets/img/icons/create-sales.png" alt="Image" />
+            <span class="nav-text d-block fs-14 fw-light"> Create Sale </span>
+          </router-link>
+        </li>
+        <li class="nav-item" v-if="hasRole('Seller')">
+          <router-link to="/sales-list" class="nav-link">
+            <img src="../../assets/img/icons/sales-list.png" alt="Image" />
+            <span class="nav-text d-block fs-14 fw-light"> Sales List </span>
+          </router-link>
+        </li>
+
+   
         <li class="nav-item" v-if="hasRole('ITAdmin')">
           <a href="javascript:void(0)" class="nav-link">
             <img src="../../assets/img/icons/sales-return.svg" alt="Image" />

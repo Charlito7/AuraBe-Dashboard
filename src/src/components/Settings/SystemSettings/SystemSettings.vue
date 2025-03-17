@@ -9,7 +9,7 @@
             <input
               type="text"
               class="w-100 d-block shadow-none fs-14 bg_ash rounded-1 text-title"
-              placeholder="Pyle Corporation"
+              placeholder="KODE Corporation"
               required
             />
           </div>
@@ -33,7 +33,7 @@
             <input
               type="text"
               class="w-100 d-block shadow-none fs-14 bg_ash rounded-1 text-title"
-              placeholder="hello@pyle.com"
+              placeholder="hello@KODE.com"
               required
             />
           </div>
@@ -90,7 +90,7 @@
             <input
               type="text"
               class="w-100 d-block shadow-none fs-14 bg_ash rounded-1 text-title"
-              placeholder="PYLE - Inventory Management With POS"
+              placeholder="KODE - Inventory Management With POS"
             />
           </div>
         </div>
@@ -100,7 +100,7 @@
             <input
               type="text"
               class="w-100 d-block shadow-none fs-14 bg_ash rounded-1 text-title"
-              placeholder="Pyle Corporation"
+              placeholder="KODE Corporation"
             />
           </div>
         </div>

@@ -29,13 +29,16 @@
       <div
         class="filter-right d-flex align-items-center justify-content-md-end flex-wrap"
       >
-        <a href="#" class="btn style-three"> Excel </a>
+      <!--
+       <a href="#" class="btn style-three"> Excel </a>
         <a href="#" class="btn style-four"> Pdf </a>
         <div class="btn style-five upload-btn">
           Import
           <img src="../../assets/img/icons/download.svg" alt="Image" />
           <input type="file" name="myfile" />
         </div>
+      -->
+       
         <router-link :to="btnLink" class="btn style-one">
           Create {{ btnText }}
           <img src="../../assets/img/icons/add-circle.svg" alt="Image" />

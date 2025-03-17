@@ -6,7 +6,7 @@
       data-bs-toggle="dropdown"
       aria-expanded="false"
     >
-      <img src="../../../assets/img/admin.webp" alt="admin" />
+    <div class="user-avatar">WC</div>
       <span class="md-none">
         <span class="d-block fw-bold text-title">{{ userFullName }}</span>
         <span class="text-paragraph fs-14">{{ userRoles }}</span>
@@ -105,4 +105,18 @@ export default defineComponent({
     }
   }
 }
+.user-avatar {
+  width: 40px; /* Adjust size */
+  height: 40px;
+  background-color: var(--secondaryColor); /* Or any color */
+  color: var(--whiteColor);
+  font-weight: bold;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  text-transform: uppercase;
+}
+
 </style>

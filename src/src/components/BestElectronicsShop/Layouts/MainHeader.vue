@@ -143,7 +143,6 @@
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <img src="../../../assets/img/admin.webp" alt="admin" />
                   <span class="md-none">
                     <span class="d-block fw-bold text-title">{{ userFullName }}</span>
                     <span class="text-paragraph fs-14">{{ userRoles }}</span>

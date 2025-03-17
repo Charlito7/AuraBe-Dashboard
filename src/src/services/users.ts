@@ -7,20 +7,16 @@ export const tokenVerification = async () => {
 
 export const roleVerification = async (roles: string[]) => {
   const formData = new FormData();
-  for (const role of roles) {
-    formData.append('role', role);
-    try {
-      const response = await api.post('/user/role/check', formData);
-      if (response.status === 200) {
-        return true; // Early return if verification succeeds
-      }
-    } catch (error) {
-      console.error("Error occurred while checking role");
-     // return false; // Return false if an error occurs during API call
-    }
-    formData.delete('role'); // Clear role for next iteration
+  //formData.append('role', roles);
+  const payload = {
+    roles : roles
   }
-  return false; // Return false if no role verification succeeds
+  const response = await api.post('/user/role/check', payload)
+  if (response.status === 200) {
+    return true;
+  }else{
+    return false;
+  }
 };
 
 

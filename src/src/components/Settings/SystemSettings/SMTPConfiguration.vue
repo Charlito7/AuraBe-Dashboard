@@ -30,7 +30,7 @@
             <input
               type="text"
               class="w-100 d-block shadow-none fs-14 bg_ash rounded-1 text-title"
-              placeholder="hello_pyle"
+              placeholder="hello_KODE"
               required
             />
           </div>

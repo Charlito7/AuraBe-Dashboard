@@ -74,7 +74,7 @@
               <input
                 type="Number"
                 class="w-100 d-block shadow-none fs-14 bg-white rounded-1 text-title"
-                placeholder="jhonathon@pyle.com"
+                placeholder="jhonathon@KODE.com"
               />
             </div>
           </div>

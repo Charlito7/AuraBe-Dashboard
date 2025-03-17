@@ -1,7 +1,7 @@
 /*-----------------------------------------------------------
-    Theme Name: Pyle
+    Theme Name: KODE
     Theme URI: 
-    Description: Pyle - Vue.js Inventory Management System With POS
+    Description: KODE - Vue.js Inventory Management System With POS
     Author: EnvyTheme
     Author URI: https://hibootstrap.com/
 -------------------------------------------------------------*/
@@ -968,6 +968,9 @@ body.minimized .main-content {
   border-bottom: 1px solid #EEF3FA;
   padding: 17px 13px;
 }
+/*.table {
+  --bs-table-bg: transparent !important;
+}*/
 
 .table thead tr th .form-check {
   position: relative;
@@ -1027,7 +1030,13 @@ body.minimized .main-content {
 .table-responsive.style-three .table tr:last-child td {
   padding-bottom: 7px;
 }
+.table tbody tr:nth-child(odd) {
+  background-color: var(--ashColor) !important;
+}
 
+.table tbody tr:nth-child(even) {
+  background-color: var(--whiteColor) !important;
+}
 /*---------------------------------
   Modal CSS
 ----------------------------------*/

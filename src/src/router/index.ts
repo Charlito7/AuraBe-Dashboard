@@ -75,9 +75,11 @@ import OfferPage from "../pages/BestElectronicsShop/OfferPage.vue";
 import FaqPage from "../pages/BestElectronicsShop/FaqPage.vue";
 import ContactPage from "../pages/BestElectronicsShop/ContactPage.vue";
 import NotFoundPage from "../pages/NotFound/NotFoundPage.vue";
+import SaleDetailsPage from "../pages/Sales/SaleDetailsPage.vue";
 
 
 import { tokenVerification, roleVerification } from "@/services/users";
+import api from "@/services/api";
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -85,7 +87,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "DashboardPage",
     component: DashboardPage,
-    meta: { requiresAuth: true, roles: ["Admin", "MANAGER","ITAdmin"] }
+   meta: { requiresAuth: true, roles: ["Seller","Admin", "MANAGER","ITAdmin"] }
   },
   {
     path: "/:pathMatch(.*)*", // Catch-all route for bad URLs
@@ -224,18 +226,19 @@ const routes: Array<RouteRecordRaw> = [
     path: "/create-sales",
     name: "CreateSalesPage",
     component: CreateSalesPage,
-    meta: { requiresAuth: true, roles: ["User"] }
+    meta: { requiresAuth: true, roles: ["Seller","User"] }
   },
   {
     path: "/sales-list",
     name: "SalesListPage",
     component: SalesListPage,
-    meta: { requiresAuth: true, roles: ["User"] }
+    meta: { requiresAuth: true, roles: ["User","Seller"] }
   },
   {
     path: "/edit-sales",
-    name: "EditSalesPage",
+    name: "EditSales",
     component: EditSalesPage,
+    props: true,
     meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
@@ -395,6 +398,11 @@ const routes: Array<RouteRecordRaw> = [
     meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
+    path: "/sale-details",
+    name: "SaleDetailsPage",
+    component: SaleDetailsPage,
+  },
+  {
     path: "/sales-payment-report",
     name: "SalesPaymentReportPage",
     component: SalesPaymentReportPage,
@@ -490,39 +498,39 @@ router.beforeEach(async (to, from, next) => {
   if (to.meta.requiresAuth) {
     let isAuthenticated =  false;// Check authentication status (e.g., by checking token)
     let hasPermission =  false// Check user's permissions (e.g., by comparing roles)
-    const token = sessionStorage.getItem('token');
 
-    if (token != null){
-      await tokenVerification().then(response => {
-        if (response.status == 200 ) {
-           isAuthenticated = true;
-        } else {
-          console.error("Request failed");
-        }
-      }).catch(error => {
-        console.error("Error occurred during request:", error);
-      });
-    }
-
-    if (!isAuthenticated) {
-      sessionStorage.setItem("redirectAfterLogin", to.fullPath);
-      return next({ name: 'LoginPage' });
-    }
-
-    // Check if the user has required permissions
-    const roles = to?.meta?.roles;
-    if (Array.isArray(roles)) {
-     const response = await roleVerification(roles);
-     if(response){
-      hasPermission = true;
-     }
-    } else {
-      console.error("Bad request");
+   // /user/token/validate
+   try{
+    const response = await api.post('/user/token/validate');
+    if(response.status === 200){
+     isAuthenticated = true;
+    }else{
+     isAuthenticated = false;
     }
    
-    if (hasPermission == false) {
-      return next('/login');
-    }
+     if (!isAuthenticated) {
+       sessionStorage.setItem("redirectAfterLogin", to.fullPath);
+       return next({ name: 'LoginPage' });
+     }
+ 
+     // Check if the user has required permissions
+     const roles = to?.meta?.roles;
+     if (Array.isArray(roles)) {
+      const response = await roleVerification(roles);
+      if(response){
+       hasPermission = true;
+      }
+     } else {
+       console.error("Bad request");
+     }
+    
+     if (hasPermission == false) {
+       return next('/login');
+     }
+   }catch{
+    return next('/login');
+   }
+
   }
   // If authentication and permissions are valid, proceed to the route
   next();

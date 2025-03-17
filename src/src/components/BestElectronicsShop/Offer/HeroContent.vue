@@ -5,7 +5,7 @@
         <div class="col-lg-6">
           <div class="hero-content">
             <h1 class="me-xxl-5 pe-xxl-5">
-              Avail the best offer from the Pyle shop
+              Avail the best offer from the KODE shop
             </h1>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et
