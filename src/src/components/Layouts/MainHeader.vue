@@ -44,14 +44,14 @@
               <ToggleFullscreenBtn />
             </div>
             <div class="option-item">
-              <NotificationDropdown />
-            </div>
-            <div class="option-item">
               <ProfileDropdown />
             </div>
             <div class="option-item">
               <SettingsBarBtn />
             </div>
+            <div class="option-item">
+              <img src="@/assets/img/icons/logout-red.png" alt="admin" />
+            </div> 
           </div>
         </div>
       </div>

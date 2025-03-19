@@ -13,7 +13,7 @@
     "@popperjs/core": "^2.11.8",
     "@vitejs/plugin-vue": "^5.0.4",
     "aos": "^2.3.4",
-    "apexcharts": "^3.44.0",
+    "apexcharts": "^4.5.0",
     "axios": "^1.6.7",
     "bootstrap": "^5.3.3",
     "bootstrap-vue-next": "^0.7.3",

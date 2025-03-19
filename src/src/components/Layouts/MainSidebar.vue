@@ -193,7 +193,12 @@
             <span class="nav-text d-block fs-14 fw-light"> Sales List </span>
           </router-link>
         </li>
-
+        <li class="nav-item" v-if="hasRole('Seller')">
+          <router-link to="/login" class="nav-link">
+            <img src="@/assets/img/icons/logout.png" alt="admin" />
+            <span class="nav-text d-block fs-14 fw-light"> Logout </span>
+          </router-link>
+        </li>
    
         <li class="nav-item" v-if="hasRole('ITAdmin')">
           <a href="javascript:void(0)" class="nav-link">

@@ -398,9 +398,11 @@ const routes: Array<RouteRecordRaw> = [
     meta: { requiresAuth: true, roles: ["ITAdmin"] }
   },
   {
-    path: "/sale-details",
+    path: "/sale-details/:id",
     name: "SaleDetailsPage",
     component: SaleDetailsPage,
+    props: true,
+    meta: { requiresAuth: true, roles: ["Seller", "Admin"] }
   },
   {
     path: "/sales-payment-report",

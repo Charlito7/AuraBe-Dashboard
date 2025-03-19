@@ -7,7 +7,6 @@
     <BreadcrumbMenu pageTitle="Sales List" />
     <FilterContent btnText="Sales" btnLink="/create-sales" />
     <SalesList />
-    <SalesDetails />
 
     <div class="flex-grow-1"></div>
     <MainFooter />
@@ -37,7 +36,6 @@ import MainSidebar from "../../components/Layouts/MainSidebar.vue";
 import BreadcrumbMenu from "../../components/Common/BreadcrumbMenu.vue";
 import FilterContent from "../../components/Common/FilterContent.vue";
 import SalesList from "../../components/Sales/SalesList/SalesList.vue";
-import SalesDetails from "../../components/Sales/SalesList/SalesDetails.vue";
 import MainFooter from "../../components/Layouts/MainFooter.vue";
 
 export default defineComponent({
@@ -48,7 +46,6 @@ export default defineComponent({
     BreadcrumbMenu,
     FilterContent,
     SalesList,
-    SalesDetails,
     MainFooter,
   },
 });

@@ -7,6 +7,10 @@ export interface SalesMetadataAndProductResponseDTO {
     paymentCustomerName?: string;
     paymentTypeTransactionId?: string;
     sellerFullName?: string;
+    discount : number,
+    shippingCost : number,
+    shippingAddress? : string,
+    orderTaxPercentage : number
     productSales?: ProductSaleDetail[];
 }
 

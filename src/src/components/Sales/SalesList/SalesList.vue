@@ -33,11 +33,9 @@
 </td>
               <td class="shadow-none text-end pe-0">
                 <div class="button-group d-flex flex-wrap align-items-center">
-                  <a href="#" title="View" 
-                  data-bs-toggle="modal"
-                  data-bs-target="#detailsModal" @click="viewSale(sale.id)">
-                    <img src="../../../assets/img/icons/eye.svg" alt="View" />
-                  </a>
+                  <router-link :to="{ name: 'SaleDetailsPage', params: { id: sale.id} }" title="View" class="me-2">
+                    <img src="../../../assets/img/icons/eye.svg" alt="Image" />
+                  </router-link>
                 </div>
               </td>
             </tr>
@@ -77,15 +75,14 @@
     </div>
    
   </div>
-  <SalesDetails v-if="selectedSale" :saleDetails="selectedSale"/>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import SalesDetails from "./SalesDetails.vue";
 import { formatDateHT } from "@/useful/formatDate";
 import api from "@/services/api";
 import { SalesMetadataAndProductResponseDTO } from "@/interfaces/interfaces/salesInterface";
+import router from "@/router";
 
 interface Sale {
   id: string;
@@ -100,9 +97,6 @@ interface Sale {
 
 export default defineComponent({
   name: "SalesList",
-  components: {
-    SalesDetails,
-  },
   data() {
     return {
       sales: [] as Sale[],
@@ -130,19 +124,6 @@ export default defineComponent({
         this.setVisiblePages();
       } catch {
         console.error("Error fetching sales");
-      }
-    },
-    async fetchSaleDetails() {
-      try {
-        const response = await api.post(`/api/sales/GetSaleDetails?saleMetadataId=${this.selectedSaleId}`);
-        if (response.data && response.data.result && response.data.result.length > 0) {
-     
-    }else{
-      this.selectedSale = {} as SalesMetadataAndProductResponseDTO
-    }
-
-      } catch(error) {
-        console.error("Error fetching sales ", error);
       }
     },
     setVisiblePages() {
@@ -174,11 +155,10 @@ export default defineComponent({
       this.fetchSales();
     },
     viewSale(saleId: string) {
-      this.selectedSaleId = saleId
-       this.fetchSaleDetails();
-    },
-    closeModal() {
-
+      router.push({
+  path: '/sale-details',
+  query: { id: saleId } // Pass only the ID as a query parameter
+});
     },
     deleteSale(id: string) {
     },
