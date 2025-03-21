@@ -42,7 +42,7 @@ export default {
   name: "MainSidebar",
   computed: {
     userRoles() {
-      const storedUser = sessionStorage.getItem("user");
+      const storedUser = localStorage.getItem("user");
       if (storedUser) {
         try {
           const userObject = JSON.parse(storedUser);

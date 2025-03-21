@@ -31,7 +31,6 @@
 
 <script lang="ts">
 import { ref } from 'vue'; // Import ref for reactive data
-import axios from 'axios';
 import { useRouter } from 'vue-router';
 import api from '@/services/api';
 
@@ -50,9 +49,13 @@ interface LoginResponse {
     "userRoles": ""
   };
 }
-
 export default {
   name: "LoginPage",
+  methods:{
+    async handlePreloader() {
+
+    }
+  },
   setup() {
     const username = ref('');
     const password = ref('');
@@ -77,9 +80,9 @@ export default {
             : ""
         }
 
-        sessionStorage.setItem('user', JSON.stringify(user));
-        const redirectUrl = sessionStorage.getItem("redirectAfterLogin") || "/";
-        sessionStorage.removeItem("redirectAfterLogin");
+        localStorage.setItem('user', JSON.stringify(user));
+        const redirectUrl = localStorage.getItem("redirectAfterLogin") || "/";
+        localStorage.removeItem("redirectAfterLogin");
         router.push(redirectUrl);
       }
       } catch {

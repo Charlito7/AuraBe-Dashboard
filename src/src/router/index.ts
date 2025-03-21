@@ -71,7 +71,7 @@ router.beforeEach(async (to, from, next) => {
     }
    
      if (!isAuthenticated) {
-       sessionStorage.setItem("redirectAfterLogin", to.fullPath);
+       localStorage.setItem("redirectAfterLogin", to.fullPath);
        return next({ name: 'LoginPage' });
      }
  
