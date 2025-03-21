@@ -50,7 +50,9 @@
               <SettingsBarBtn />
             </div>
             <div class="option-item">
-              <img src="@/assets/img/icons/logout-red.png" alt="admin" />
+              <a class="nav-link" @click="handleLogout">
+            <img src="@/assets/img/icons/logout-red.png" alt="Logout" />
+          </a>
             </div> 
           </div>
         </div>
@@ -66,6 +68,7 @@ import LanguageDropdown from "./HeaderContent/LanguageDropdown.vue";
 import NotificationDropdown from "./HeaderContent/NotificationDropdown.vue";
 import ProfileDropdown from "./HeaderContent/ProfileDropdown.vue";
 import SettingsBarBtn from "./HeaderContent/SettingsBarBtn.vue";
+import api from '@/services/api';
 
 export default defineComponent({
   name: "MainHeader",
@@ -99,6 +102,20 @@ export default defineComponent({
         this.showOpenBtn = true;
         this.showCloseBtn = false;
         // Perform any other actions you want after clicking "close"
+      }
+    },
+    async handleLogout() {
+      console.log("Hello")
+      try {
+        const response = await api.post(`/logout`)
+
+        if (response) {
+          this.$router.push("/login");
+        } else {
+          console.log("Logout failed")
+        }
+      } catch (error) {
+        console.error("Error during logout:", error);
       }
     },
   },

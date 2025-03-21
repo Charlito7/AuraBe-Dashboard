@@ -6,7 +6,7 @@
       data-bs-toggle="dropdown"
       aria-expanded="false"
     >
-    <div class="user-avatar">WC</div>
+    <div class="user-avatar">{{ userInitial }}</div>
       <span class="md-none">
         <span class="d-block fw-bold text-title">{{ userFullName }}</span>
         <span class="text-paragraph fs-14">{{ userRoles }}</span>
@@ -25,7 +25,10 @@
           </router-link>
         </li>
         <li class="fs-14 d-block transition">
-          <router-link to="/login" class="d-block"> Logout </router-link>
+          <a class="nav-link" @click="handleLogout">
+            <img src="@/assets/img/icons/logout-red.png" alt="Logout" />
+            <span class="nav-text d-block fs-14 fw-light"> Logout </span>
+          </a>
         </li>
       </ul>
     </div>
@@ -34,19 +37,37 @@
 
 <script>
 import { defineComponent, ref, onMounted } from "vue";
+import api from '@/services/api';
 
 export default defineComponent({
   name: "ProfileDropdown",
+  methods: {
+    async handleLogout() {
+      try {
+        const response = await api.post(`/logout`)
+
+        if (response) {
+          this.$router.push("/login");
+        } else {
+          console.log("Logout failed")
+        }
+      } catch (error) {
+        console.error("Error during logout:", error);
+      }
+    },
+  },
   setup() {
     const userFullName = ref(""); // Default name
     const userRoles = ref(""); // Default role
+    const userInitial = ref(""); 
 
     onMounted(() => {
       const storedUser = sessionStorage.getItem("user");
       if (storedUser) {
         try {
           const userObject = JSON.parse(storedUser);
-          userFullName.value = userObject.fullName || "";
+          userFullName.value = userObject.firstName + " " + userObject.lastName || "";
+          userInitial.value = userObject.initial;
           userRoles.value = userObject.roles || ""; // Fallback to Admin if not found
         } catch (error) {
           console.error("Error parsing user data:", error);
@@ -57,6 +78,7 @@ export default defineComponent({
     return {
       userFullName,
       userRoles,
+      userInitial
     };
   },
 });

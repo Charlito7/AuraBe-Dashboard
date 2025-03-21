@@ -16,7 +16,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "DashboardPage",
     component: DashboardPage,
-   meta: { requiresAuth: true, roles: ["Seller","Admin", "MANAGER","ITAdmin"] }
+   meta: { requiresAuth: true, roles: ["Seller"] }
   },
   {
     path: "/:pathMatch(.*)*", // Catch-all route for bad URLs

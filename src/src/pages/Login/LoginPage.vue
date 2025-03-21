@@ -44,7 +44,9 @@ interface LoginResponse {
   result: {
     "token": "",
     "refreshToken": "",
-    "fullName": "",
+    "firstName": "",
+    "lastName": "",
+    "initial": "",
     "userRoles": ""
   };
 }
@@ -67,7 +69,9 @@ export default {
       const response = await api.post<LoginResponse>(process.env.VUE_APP_LOGIN_URI, model); // Define type for response
       if (response.status === 200) {
         const user = {
-          fullName: response.data.result.fullName,
+          firstName: response.data.result.firstName,
+          lastName: response.data.result.lastName,
+          initial: response.data.result.initial,
           roles: Array.isArray(response.data.result.userRoles)
             ? response.data.result.userRoles.join("/")
             : ""

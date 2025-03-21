@@ -26,10 +26,30 @@
 </template>
 
 <script lang="ts">
+import api from "@/services/api";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "StatusContent",
+  mounted() {
+    this.fetchDailyResume();
+  },
+  methods: {
+    async fetchDailyResume() {
+      try {
+        const response = await api.post(
+          `/api/sales/GetDailyResume`
+        );
+        const sales = response.data.result;
+        this.status[0].value = sales.amountIN
+        this.status[1].value = sales.totalPriceSales
+        this.status[2].value = sales.total
+        this.status[3].value = sales.totalQuantitySales
+      } catch {
+        console.error("Error fetching sales");
+      }
+    }
+  },
   data() {
     return {
       status: [
@@ -37,29 +57,29 @@ export default defineComponent({
           id: 1,
           imgBlurIcon: require("../../assets/img/icons/wallet-money-2.svg"),
           imgIcon: require("../../assets/img/icons/wallet-money.svg"),
-          title: "SALES",
-          value: "5312.00",
+          title: "Start",
+          value: "0.00",
         },
         {
           id: 2,
           imgBlurIcon: require("../../assets/img/icons/wallet-add-2.svg"),
           imgIcon: require("../../assets/img/icons/wallet-add.svg"),
-          title: "PURCHASES",
-          value: "1304.00",
+          title: "Sales",
+          value: "0.00",
         },
         {
           id: 3,
           imgBlurIcon: require("../../assets/img/icons/money-send-2.svg"),
           imgIcon: require("../../assets/img/icons/money-send.svg"),
-          title: "SALES RETURN",
-          value: "314.00",
+          title: "Daily Total",
+          value: "0",
         },
         {
           id: 4,
           imgBlurIcon: require("../../assets/img/icons/money-change-2.svg"),
           imgIcon: require("../../assets/img/icons/money-change.svg"),
-          title: "PURCHASES RETURN",
-          value: "50.00",
+          title: "Quantity",
+          value: "0",
         },
       ],
     };

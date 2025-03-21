@@ -1,7 +1,7 @@
 <template>
   <div class="row gx-0 mb-30">
-    <div class="col-md-6">
-      <div class="filter-left d-flex align-items-center flex-wrap">
+   <div class="col-md-6">
+      <!-- <div class="filter-left d-flex align-items-center flex-wrap">
         <button
           type="button"
           class="btn style-two"
@@ -23,21 +23,20 @@
             <img src="../../assets/img/icons/search.svg" alt="Image" />
           </button>
         </form>
-      </div>
-    </div>
+      </div> -->
+    </div> 
     <div class="col-md-6">
       <div
         class="filter-right d-flex align-items-center justify-content-md-end flex-wrap"
       >
-      <!--
-       <a href="#" class="btn style-three"> Excel </a>
+      <!--   <a href="#" class="btn style-three"> Excel </a>
         <a href="#" class="btn style-four"> Pdf </a>
         <div class="btn style-five upload-btn">
           Import
           <img src="../../assets/img/icons/download.svg" alt="Image" />
           <input type="file" name="myfile" />
-        </div>
-      -->
+        </div> -->
+
        
         <router-link :to="btnLink" class="btn style-one">
           Create {{ btnText }}
