@@ -78,12 +78,14 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
+import { useRouter } from 'vue-router';
 import api from '@/services/api';
 
-export default {
+export default defineComponent({
   name: "MainSidebar",
   computed: {
-    userRoles() {
+    userRoles(): string[] {
       const storedUser = localStorage.getItem("user");
       if (storedUser) {
         try {
@@ -97,37 +99,42 @@ export default {
     },
   },
   methods: {
-    hasRole(roles: string | string[]) {
-  if (Array.isArray(roles)) {
-    return roles.some(role => this.userRoles.includes(role));
-  }
-  return this.userRoles.includes(roles);
-},hasNotRole(roles: string | string[]) {
-  if (Array.isArray(roles)) {
-    return roles.every(role => !this.userRoles.includes(role));
-  }
-  return !this.userRoles.includes(roles);
-}
+    hasRole(roles: string | string[]): boolean {
+      const userRoles = this.userRoles;
 
-,
+      if (Array.isArray(roles)) {
+        return roles.some(role => userRoles.includes(role));
+      }
+      return userRoles.includes(roles);
+    },
+
+    hasNotRole(roles: string | string[]): boolean {
+      const userRoles = this.userRoles;
+
+      if (Array.isArray(roles)) {
+        return roles.every(role => !userRoles.includes(role));
+      }
+      return !userRoles.includes(roles);
+    },
+
     async handleLogout() {
+      const router = useRouter(); // Use the router composable
+
       try {
-        const response = await api.post(`/logout`)
+        const response = await api.post(process.env.VUE_APP_LOGOUT);
 
         if (response) {
-          this.$router.push("/login");
+          this.$router.push(process.env.VUE_APP_LOGIN_PAGE);
         } else {
-          console.log("Logout failed")
+          console.log("Logout failed");
         }
       } catch (error) {
         console.error("Error during logout:", error);
       }
     },
   },
-
-};
+});
 </script>
-
 <style lang="scss" scoped>
 .sidebar-area {
   top: 100px;

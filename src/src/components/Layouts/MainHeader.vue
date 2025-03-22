@@ -105,17 +105,16 @@ export default defineComponent({
       }
     },
     async handleLogout() {
-      console.log("Hello")
       try {
-        const response = await api.post(`/logout`)
+        const response = await api.post(process.env.VUE_APP_LOGOUT)
 
         if (response) {
-          this.$router.push("/login");
+          this.$router.push(process.env.VUE_APP_LOGIN_PAGE);
         } else {
-          console.log("Logout failed")
+          console.error("Logout failed")
         }
-      } catch (error) {
-        console.error("Error during logout:", error);
+      } catch {
+        console.error("Error during logout:");
       }
     },
   },

@@ -117,7 +117,7 @@ export default defineComponent({
     async fetchSales() {
       try {
         const response = await api.post(
-          `/api/sales/GetSalesListPagination?page=${this.currentPage}&pageSize=${this.pageSize}`
+          `${process.env.VUE_APP_GET_SALES_LIST_PAGINATION}?page=${this.currentPage}&pageSize=${this.pageSize}`
         );
         this.sales = response.data.result.sales;
         this.totalPages = response.data.result.pagination.totalPages;
@@ -156,7 +156,7 @@ export default defineComponent({
     },
     viewSale(saleId: string) {
       router.push({
-  path: '/sale-details',
+  path: process.env.VUE_APP_SALE_DETAILS_PAGE,
   query: { id: saleId } // Pass only the ID as a query parameter
 });
     },

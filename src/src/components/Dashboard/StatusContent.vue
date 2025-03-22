@@ -38,8 +38,8 @@ export default defineComponent({
     async fetchDailyResume() {
       try {
         const response = await api.post(
-          `/api/sales/GetDailyResume`
-        );
+          process.env.VUE_APP_DAILY_RESUME
+        ); 
         const sales = response.data.result;
         this.status[0].value = sales.amountIN
         this.status[1].value = sales.totalPriceSales

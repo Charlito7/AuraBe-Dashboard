@@ -49,7 +49,7 @@
                   <router-link :to="{ name: 'EditProduct', params: { id: product.id } }" title="Edit" class="me-2">
                     <img src="../../../assets/img/icons/edit.svg" alt="Image" />
                   </router-link>
-                  <a class="delete-btn" data-bs-toggle="offcanvas" href="#deletePopup" role="button" aria-controls="deletePopup">
+                  <a class="delete-btn"  href="#" role="button" >
                     <img src="../../../assets/img/icons/close.svg" alt="Image" />
                   </a>
                 </div>

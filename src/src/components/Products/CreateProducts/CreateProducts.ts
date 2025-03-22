@@ -38,10 +38,10 @@ export default defineComponent({
     // Fetch categories from backend
     const fetchCategories = async () => {
       try {
-        const response = await api.post("/api/category/GetAll");
+        const response = await api.post(process.env.VUE_APP_GET_ALL_CATEGORY);
         categories.value = response.data.result;
-      } catch (error) {
-        console.error("Error fetching categories:", error);
+      } catch {
+        console.error("Error fetching categories:");
       }
     };
 
@@ -80,7 +80,7 @@ export default defineComponent({
       };
 
       try {
-        const response = await api.post("/api/products", [productRequest]);
+        const response = await api.post(process.env.VUE_APP_CREATE_PRODUCT, [productRequest]);
         alertMessage.value = "Product created successfully!";
         alertType.value = "success";
         clearForm(); // Clear the form after success

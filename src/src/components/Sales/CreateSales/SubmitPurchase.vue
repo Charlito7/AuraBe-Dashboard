@@ -353,7 +353,7 @@ const validatePositiveField = (field: "cash" | "discount") => {
 const redirectToSalesList = () => {
   if (countdownInterval) clearInterval(countdownInterval); // Clear interval
   showModal.value = false;
-  router.push('/sales-list');
+  router.push(process.env.VUE_APP_SALES_LIST);
 };
 
 // Close modal manually (without redirect)
@@ -381,7 +381,7 @@ const closeModal = () => {
       };
 
       try {
-        const response = await api.post('/api/sales/CreateSales', salesData);
+        const response = await api.post(process.env.VUE_APP_CREATE_SALES, salesData);
 
         if (!response) {
           throw new Error("Failed to submit sales data");

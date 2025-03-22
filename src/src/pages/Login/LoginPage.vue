@@ -69,7 +69,7 @@ export default {
       UserName : username.value,
       Password :  password.value
       }
-      const response = await api.post<LoginResponse>(process.env.VUE_APP_LOGIN_URI, model); // Define type for response
+      const response = await api.post<LoginResponse>(process.env.VUE_APP_LOGIN, model);
       if (response.status === 200) {
         const user = {
           firstName: response.data.result.firstName,
@@ -86,7 +86,7 @@ export default {
         router.push(redirectUrl);
       }
       } catch {
-        router.push('/login');
+        router.push(process.env.VUE_APP_LOGIN);
       }
       
 

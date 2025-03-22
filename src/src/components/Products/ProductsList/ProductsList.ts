@@ -31,7 +31,7 @@ export default defineComponent({
     async fetchProducts() {
       try {
         const response = await api.post(
-          `/api/products/GetProductListPagination?page=${this.currentPage}&pageSize=${this.pageSize}`
+          `${process.env.VUE_APP_GET_PRODUCTS_LIST_PAGINATION}?page=${this.currentPage}&pageSize=${this.pageSize}`
         );
         this.products = response.data.result.products;
         this.totalPages = response.data.result.pagination.totalPages; // Set total pages based on response

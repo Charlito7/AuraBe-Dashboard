@@ -72,7 +72,7 @@ export default defineComponent({
   methods: {
     async fetchSaleDetails() {
       try {
-        const response = await api.post(`/api/sales/GetSaleDetails?saleMetadataId=${this.selectedSaleId}`);
+        const response = await api.post(`${process.env.VUE_APP_GET_SALES_DETAILS}=${this.selectedSaleId}`);
         if (response.data && response.data.result && response.data.result.length > 0) {
           this.selectedSale = response.data.result[0];
           this.selectedSale.transactionDate = formatDateHT(this.selectedSale.transactionDate)

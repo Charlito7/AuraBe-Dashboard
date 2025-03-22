@@ -178,7 +178,7 @@ export default defineComponent({
 
       try {
         loadingSuggestions.value = true;
-        const response = await api.post(`/api/products/suggestions/get?userInput=${searchTerm}`);
+        const response = await api.post(`${process.env.VUE_APP_GET_PRODUCTS_SUGGESTIONS}?userInput=${searchTerm}`);
         suggestions.value = response.data; 
       } catch (error) {
         console.error("Error fetching suggestions:", error);
@@ -211,7 +211,7 @@ export default defineComponent({
       }
 
       try {
-        const response = await api.post('/api/products/GetProductByBarCode', {
+        const response = await api.post(process.env.VUE_APP_GET_PRODUCTS_BY_BARCODE, {
           value: barcode.value
         });
         //remove the value on Search bar

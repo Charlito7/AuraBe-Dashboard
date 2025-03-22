@@ -1,17 +1,16 @@
 import api from './api';
 
 export const tokenVerification = async () => {
-  const response = await api.post('/user/token/validate');
+  const response = await api.post(process.env.VUE_APP_USER_VALIDATE_TOKEN);
   return response;
 };
 
 export const roleVerification = async (roles: string[]) => {
   const formData = new FormData();
-  //formData.append('role', roles);
   const payload = {
     roles : roles
   }
-  const response = await api.post('/user/role/check', payload)
+  const response = await api.post(process.env.VUE_APP_USER_ROLES_CHECK, payload)
   if (response.status === 200) {
     return true;
   }else{
@@ -21,6 +20,6 @@ export const roleVerification = async (roles: string[]) => {
 
 
 export const getUser = async (userId: number) => {
-  const response = await api.get(`/users/${userId}`);
+  const response = await api.get(`${process.env.VUE_APP_USERS}${userId}`);
   return response.data;
 };
