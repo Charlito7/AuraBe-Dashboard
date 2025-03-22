@@ -1,5 +1,9 @@
 import { createWebHistory, createRouter, RouteRecordRaw } from "vue-router";
 import DashboardPage from "../pages/Dashboard/DashboardPage.vue";
+import CreateProductsPage from "../pages/Products/CreateProductsPage.vue";
+import ProductsListPage from "../pages/Products/ProductsListPage.vue";
+import ProductDetailsPage from "../pages/Products/ProductDetailsPage.vue";
+import EditProductsPage from "../pages/Products/EditProductsPage.vue";
 import CreateSalesPage from "../pages/Sales/CreateSalesPage.vue";
 import SalesListPage from "../pages/Sales/SalesListPage.vue";
 import LoginPage from "../pages/Login/LoginPage.vue";
@@ -16,7 +20,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "DashboardPage",
     component: DashboardPage,
-   meta: { requiresAuth: true, roles: ["Seller"] }
+   meta: { requiresAuth: true, roles: ["Seller", "Admin"] }
   },
   {
     path: "/:pathMatch(.*)*", // Catch-all route for bad URLs
@@ -24,16 +28,42 @@ const routes: Array<RouteRecordRaw> = [
     component: NotFoundPage
   },
   {
+    path: "/create-product",
+    name: "CreateProductsPage",
+    component: CreateProductsPage,
+    meta: { requiresAuth: true, roles: ["Admin"] }
+  },
+  {
+    path: "/product-list",
+    name: "ProductsListPage",
+    component: ProductsListPage,
+    meta: { requiresAuth: true, roles: ["Admin"] }
+  },
+  {
+    path: '/edit-product/:id',
+    name: 'EditProduct',
+    component: EditProductsPage, // Assuming you have a component for editing products
+    props: true,
+    meta: { requiresAuth: true, roles: ["Admin"] }
+  },
+  {
+    path: '/product-details/:id',
+    name: 'ProductDetails',
+    component: ProductDetailsPage, // or import it dynamically if needed
+    props: true, // allows the id to be passed as a prop
+    meta: { requiresAuth: true, roles: ["Admin"] }
+  },
+  {
     path: "/create-sales",
     name: "CreateSalesPage",
     component: CreateSalesPage,
-    meta: { requiresAuth: true, roles: ["Seller","User"] }
+    meta: { requiresAuth: true, roles: ["Seller","Admin"] }
   },
   {
     path: "/sales-list",
     name: "SalesListPage",
     component: SalesListPage,
-    meta: { requiresAuth: true, roles: ["User","Seller"] }
+    meta: { requiresAuth: true, roles: ["Admin","Seller"] }
   },
   {
     path: "/sale-details/:id",

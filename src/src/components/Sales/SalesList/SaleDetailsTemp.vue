@@ -97,7 +97,7 @@
                     $ 0.00
                   </td>
                   <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
-                    $  {{product.quantity * product.unitCost}}
+                    $  {{(product.quantity * product.unitCost).toFixed(2)}}
                   </td>
                 </tr>
                 <tr>

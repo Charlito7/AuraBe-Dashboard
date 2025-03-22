@@ -5,13 +5,55 @@
   >
     <div id="sidebar_menu_wrap" class="sidebar-menu-wrap">
       <ul class="sidebar-menu list-style">
-        <li class="nav-item" v-if="hasRole('Seller')">
+        <li class="nav-item" v-if="hasRole(['Seller', 'Admin'])">
           <router-link to="/" class="nav-link">
             <img src="../../assets/img/icons/dashboard.svg" alt="Image" />
             <span class="nav-text d-block fs-14 fw-light"> Dashboard </span>
           </router-link>
         </li>
+        <li class="nav-item" v-if="hasRole('Admin')">
+          <a href="javascript:void(0)" class="nav-link">
+            <img src="../../assets/img/icons/products.svg" alt="Image" />
+            <span class="nav-text d-block fs-14"> Products </span>
+          </a>
+          <ul class="sidebar-secondary-menu list-style bg-white">
+            <li class="nav-item">
+              <router-link to="/create-product">
+                <img src="../../assets/img/icons/create-item.svg" alt="Image" />
+                Create Product
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/product-list">
+                <img src="../../assets/img/icons/item-list.svg" alt="Image" />
+                Product List
+              </router-link>
+            </li>
+          </ul>
+        </li>
 
+        <!-- Sales -->
+        <li class="nav-item" v-if="hasRole('Admin')">
+          <a href="javascript:void(0)" class="nav-link">
+            <img src="../../assets/img/icons/sale.svg" alt="Image" />
+            <span class="nav-text d-block fs-14"> Sales </span>
+          </a>
+          <ul class="sidebar-secondary-menu bg-white list-style">
+            <li class="nav-item">
+              <router-link to="/create-sales">
+                <img src="../../assets/img/icons/create-item.svg" alt="Image" />
+                Create Sale
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/sales-list">
+                <img src="../../assets/img/icons/item-list.svg" alt="Image" />
+                Sales List
+              </router-link>
+            </li>
+          </ul>
+        </li>
+    
         <li class="nav-item" v-if="hasRole('Seller')">
           <router-link to="/create-sales" class="nav-link">
             <img src="../../assets/img/icons/create-sales.png" alt="Image" />
@@ -24,7 +66,7 @@
             <span class="nav-text d-block fs-14 fw-light"> Sales List </span>
           </router-link>
         </li>
-        <li class="nav-item" v-if="hasRole('Seller')">
+        <li class="nav-item" v-if="hasRole(['Seller', 'Admin'])">
           <a class="nav-link" @click="handleLogout">
             <img src="@/assets/img/icons/logout.png" alt="Logout" />
             <span class="nav-text d-block fs-14 fw-light"> Logout </span>
@@ -35,7 +77,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import api from '@/services/api';
 
 export default {
@@ -55,9 +97,19 @@ export default {
     },
   },
   methods: {
-    hasRole(role) {
-      return this.userRoles.includes(role);
-    },
+    hasRole(roles: string | string[]) {
+  if (Array.isArray(roles)) {
+    return roles.some(role => this.userRoles.includes(role));
+  }
+  return this.userRoles.includes(roles);
+},hasNotRole(roles: string | string[]) {
+  if (Array.isArray(roles)) {
+    return roles.every(role => !this.userRoles.includes(role));
+  }
+  return !this.userRoles.includes(roles);
+}
+
+,
     async handleLogout() {
       try {
         const response = await api.post(`/logout`)
