@@ -61,7 +61,7 @@
             </thead>
             <tbody>
               <tr v-if="products.length === 0">
-                <td colspan="9" class="text-center fs-14">
+                <td colspan="9" class="text-center text-black fs-14">
                   No products are selected yet
                 </td>
               </tr>

@@ -17,14 +17,14 @@
           <tbody>
             <tr v-for="sale in sales" :key="sale.id">
               <td class="shadow-none text-black">{{ formatDateHT(sale.transactionDate)}}</td>
-              <td class="shadow-none">{{ sale.sellerFullName }}</td>
-              <td class="shadow-none">{{ sale.paymentCustomerName || 'N/A' }}</td>
-              <td class="shadow-none">
+              <td class="shadow-none text-black">{{ sale.sellerFullName }}</td>
+              <td class="shadow-none text-black">{{ sale.paymentCustomerName || 'N/A' }}</td>
+              <td class="shadow-none text-black">
                 <button :class="sale.status || 'PendingDelivery'">
                 {{ sale.status || 'N/A' }}
                 </button>
               </td>
-              <td class="shadow-none">
+              <td class="shadow-none text-black">
                 ${{ sale.totalAmount ? sale.totalAmount.toFixed(2) : '0.00' }}</td>
                 <td class="shadow-none">
                   <button :class="sale.paymentType">
