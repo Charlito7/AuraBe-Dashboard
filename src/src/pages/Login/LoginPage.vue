@@ -86,7 +86,7 @@ export default {
         router.push(redirectUrl);
       }
       } catch {
-        router.push(process.env.VUE_APP_LOGIN);
+        router.push(process.env.VUE_APP_LOGIN_PAGE);
       }
       
 
