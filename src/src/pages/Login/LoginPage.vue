@@ -19,7 +19,7 @@
             <input type="password" id="password" v-model="password" placeholder="Enter Password"
               class="w-100 h-55 bg_ash border-0 rounded-1 fs-14 text-black" />
             <span id="toggler" class="position-absolute">
-              <img src="../../assets/img/icons/eye-close.svg" alt="Image" />
+              <img src="@/assets/img/icons/eye-close.svg" alt="Image" />
             </span>
           </div>
           <button type="submit" class="btn style-one w-100 d-block">Login</button>
