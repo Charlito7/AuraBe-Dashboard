@@ -37,13 +37,13 @@
               {{ product.code }}
             </td>
             <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
-              $ {{ product.price }}
+              HTG {{ product.price }}
             </td>
             <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
               <QuantityCounter />
             </td>
             <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
-              ${{ product.subTotal }}
+             HTG {{ product.subTotal }}
             </td>
             <td class="shadow-none lh-1 text-end pe-0">
               <div

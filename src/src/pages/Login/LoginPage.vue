@@ -3,9 +3,13 @@
     <div class="login-bg"></div>
     <div class="login-form-wrap">
       <div class="login-form">
-        <router-link to="/" class="logo">
-          <img src="../../assets/img/aurabe-logo.png" alt="Image" class="d-block mx-auto" />
-        </router-link>
+        <router-link
+  to="/"
+  class="logo"
+  style="display: block; text-align: center; color: #B18164; text-transform: uppercase; font-weight: bold; font-size: 24px; text-decoration: none;"
+>
+  AURABÊ
+</router-link>
         <form @submit.prevent="handleSubmit">
           <div class="form-group mb-15">
             <label class="d-block fs-14 text-black mb-2">
@@ -19,10 +23,11 @@
             <input type="password" id="password" v-model="password" placeholder="Enter Password"
               class="w-100 h-55 bg_ash border-0 rounded-1 fs-14 text-black" />
             <span id="toggler" class="position-absolute">
-              <img src="@/assets/img/icons/eye-close.svg" alt="Image" />
+              <img src="../../assets/img/icons/eye-close.svg" alt="Image" />
             </span>
           </div>
-          <button type="submit" class="btn style-one w-100 d-block">Login</button>
+          <button type="submit" class="btn login-btn w-100 d-block">Login</button>
+
         </form>
       </div>
     </div>
@@ -101,7 +106,7 @@ export default {
 <style lang="scss" scoped>
 .login-wrapper {
   .login-bg {
-    background-image: url(../../assets/img/login-bg.webp);
+    background-image: url(../../assets/img/aurabe_cosmetics.webp);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: bottom center;
@@ -151,6 +156,27 @@ export default {
     cursor: pointer;
   }
 }
+
+.login-btn {
+  background-color: #B18164;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  height: 55px;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken(#B18164, 5%);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(177, 129, 100, 0.4);
+  }
+}
+
 
 @media only screen and (max-width: 991px) {
   .login-wrapper {

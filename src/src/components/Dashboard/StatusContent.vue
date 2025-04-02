@@ -17,7 +17,7 @@
             <span class="d-block fs-14 fw-medium">
               {{ state.title }}
             </span>
-            <h4 class="fw-black mb-0 lh-1">${{ state.value }}</h4>
+            <h4 class="fw-black mb-0 lh-1">HTG {{ state.value }}</h4>
           </div>
         </div>
       </div>

@@ -73,7 +73,7 @@
                   {{ product.barCode }}
                 </td>
                 <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
-                  $ {{ product.price }}
+                  HTG {{ product.price }}
                 </td>
                 <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
                   <span class="badge badge-success fw-semibold fs-14">
@@ -89,7 +89,7 @@
                   </div>
                 </td>
                 <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
-                  $ {{ formatNumber(product.salesQuantity * product.price) }}
+                  HTG {{ formatNumber(product.salesQuantity * product.price) }}
                 </td>
                 <td class="shadow-none lh-1 text-end pe-0">
                   <div class="button-group style-two ms-auto d-flex flex-wrap align-items-center">

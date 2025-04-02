@@ -32,7 +32,7 @@ export default {
 
 <style lang="scss" scoped>
 .footer-wrap {
-  background-color: #161e2c;
+  background-color: #B18164;
   padding: {
     top: 26px;
     bottom: 26px;

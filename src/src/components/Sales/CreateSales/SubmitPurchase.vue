@@ -101,38 +101,38 @@
             <tr>
               <th scope="row" class="fs-14 text-title lh-1 ls-1 fw-normal">TOTAL :</th>
               <td class="fs-14 fw-bold lh-1 text-purple text-end">
-                ${{ total.toFixed(2) }}
+                HTG {{ total.toFixed(2) }}
               </td>
             </tr>
             <tr>
               <th scope="row" class="fs-14 text-title lh-1 ls-1 fw-normal">DISCOUNT :</th>
               <td class="fs-14 fw-semibold lh-1 text-optional text-end">
-                ${{ submitPurchaseResume.discount }}
+                HTG {{ submitPurchaseResume.discount }}
               </td>
             </tr>
             <tr>
               <th scope="row" class="fs-14 text-title lh-1 ls-1 fw-normal">SHIPPING :</th>
               <td class="fs-14 fw-semibold lh-1 text-optional text-end">
-                ${{ submitPurchaseResume.shippingCost }}
+                HTG {{ submitPurchaseResume.shippingCost }}
               </td>
             </tr>
             <tr>
               <th scope="row" class="fs-14 text-title lh-1 ls-1 fw-normal">GRAND TOTAL :</th>
               <td class="fs-14 fw-bold lh-1 text-purple text-end">
-                ${{ grandTotal.toFixed(2) }}
+                HTG {{ grandTotal.toFixed(2) }}
               </td>
             </tr>
             <!-- New Return Field -->
             <tr>
               <th scope="row" class="fs-14 text-title lh-1 ls-1 fw-normal">Cash :</th>
               <td class="fs-14 fw-semibold lh-1 text-optional text-end">
-                ${{ cash }}
+                HTG {{ cash }}
               </td>
             </tr>
             <tr>
               <th scope="row" class="fs-14 text-title lh-1 ls-1 fw-normal">RETURN :</th>
               <td class="fs-14 fw-bold lh-1 text-purple text-end">
-                ${{ returnAmount.toFixed(2) }}
+                HTG {{ returnAmount.toFixed(2) }}
               </td>
             </tr>
           </tbody>

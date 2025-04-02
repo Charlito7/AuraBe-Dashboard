@@ -13,14 +13,9 @@
       <img src="../../assets/img/icons/close-circle.svg" alt="Image" />
     </button>
     <div class="offcanvas-body p-0">
-      <router-link to="/" class="logo">
-        <img src="../../assets/img/aurabe-logo.png" alt="Image" class="logo-light" />
-        <img
-          src="../../assets/img/logo-white.webp"
-          alt="Image"
-          class="logo-dark"
-        />
-      </router-link>
+      <router-link to="/" class="logo" style="color: #B18164; text-transform: uppercase; font-weight: bold; text-decoration: none;">
+  AURABÊ
+</router-link>
       <!-- <div class="settings-item">
         <div class="d-flex justify-content-between align-items-center">
           <span class="fs-14 fw-medium text-title mb-0">Enable RTL</span>

@@ -25,7 +25,7 @@
                 </button>
               </td>
               <td class="shadow-none text-black">
-                ${{ sale.totalAmount ? sale.totalAmount.toFixed(2) : '0.00' }}</td>
+                HTG {{ sale.totalAmount ? sale.totalAmount.toFixed(2) : '0.00' }}</td>
                 <td class="shadow-none">
                   <button :class="sale.paymentType">
   {{ sale.paymentType || 'N/A' }}

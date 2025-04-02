@@ -49,7 +49,7 @@
                 {{ product.code }}
               </td>
               <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
-                $ {{ product.cost }}
+                HTG {{ product.cost }}
               </td>
               <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
                 <span class="badge badge-success fw-semibold fs-14">
@@ -60,13 +60,13 @@
                 <QuantityCounter />
               </td>
               <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
-                $ {{ product.discount }}
+                HTG {{ product.discount }}
               </td>
               <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
-                $ {{ product.tax }}
+                HTG {{ product.tax }}
               </td>
               <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
-                $ {{ product.subTotal }}
+                HTG {{ product.subTotal }}
               </td>
               <td class="shadow-none lh-1 text-end pe-0">
                 <div

@@ -111,7 +111,7 @@
                     ORDER TAX
                   </td>
                   <td class="shadow-none lh-1 fs-14 fw-semibold text-paragraph float-right">
-                    $ {{ saleDetails?.orderTaxPercentage }}
+                    HTG {{ saleDetails?.orderTaxPercentage }}
                   </td>
                 </tr>
                 <tr>
@@ -125,7 +125,7 @@
                     DISCOUNT
                   </td>
                   <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
-                    $ {{ saleDetails?.discount }}
+                    HTG {{ saleDetails?.discount }}
                   </td>
                 </tr>
                 <tr>
@@ -139,7 +139,7 @@
                     Shipping
                   </td>
                   <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
-                    $ {{ saleDetails?.shippingCost }}
+                    HTG {{ saleDetails?.shippingCost }}
                   </td>
                 </tr>
                 <tr>
@@ -153,7 +153,7 @@
                     GRAND TOTAL
                   </td>
                   <td class="shadow-none lh-1 fs-14 fw-black text-purple">
-                    $ {{ saleDetails?.totalAmount }}
+                    HTG {{ saleDetails?.totalAmount }}
                   </td>
                 </tr>
                 <tr>
@@ -167,7 +167,7 @@
                     PAID
                   </td>
                   <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
-                    $ {{ saleDetails?.totalAmount }}
+                    HTG {{ saleDetails?.totalAmount }}
                   </td>
                 </tr>
                 <tr>

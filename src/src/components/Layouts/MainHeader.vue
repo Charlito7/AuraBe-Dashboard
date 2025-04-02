@@ -4,18 +4,9 @@
       <div class="row align-items-center">
         <div class="col-xl-6 col-lg-5 col-md-5 col-sm-4">
           <div class="header-left d-flex align-items-center">
-            <router-link to="/" class="logo">
-              <img
-                class="logo-light"
-                src="../../assets/img/aurabe-logo.png"
-                alt="Image"
-              />
-              <img
-                class="logo-dark"
-                src="../../assets/img/logo-white.webp"
-                alt="Image"
-              />
-            </router-link>
+            <router-link to="/" class="logo" style="color: #B18164; text-transform: uppercase; font-weight: bold; text-decoration: none;">
+  AURABÊ
+</router-link>
             <button
               class="header-burger-menu transition position-relative lh-1 bg-transparent p-0 border-0"
               id="header-burger-menu"
