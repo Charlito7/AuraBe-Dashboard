@@ -10,7 +10,7 @@ steps:
 
   # Étape 1 : Build de l'image Docker
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/kode-461516/kode-pos-frontend', '.']
+    args: ['build', '-t', 'gcr.io/kode-461516/kode-pos-frontend', 'src/']
 
   # Étape 2 : Push de l’image
   - name: 'gcr.io/cloud-builders/docker'
