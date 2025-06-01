@@ -7,6 +7,7 @@ import EditProductsPage from "../pages/Products/EditProductsPage.vue";
 import CreateSalesPage from "../pages/Sales/CreateSalesPage.vue";
 import SalesListPage from "../pages/Sales/SalesListPage.vue";
 import LoginPage from "../pages/Login/LoginPage.vue";
+import PasswordChangePage from "../pages/Login/PasswordChangePage.vue";
 import NotFoundPage from "../pages/NotFound/NotFoundPage.vue";
 import SaleDetailsPage from "../pages/Sales/SaleDetailsPage.vue";
 
@@ -21,6 +22,12 @@ const routes: Array<RouteRecordRaw> = [
     name: "DashboardPage",
     component: DashboardPage,
    meta: { requiresAuth: true, roles: ["Seller", "Admin"] }
+  },
+    {
+    path: "/passwordChange",
+    name: "PasswordChangePage",
+    component: PasswordChangePage,
+  meta: { requiresAuth: true, roles: ["Seller", "Admin"] }
   },
   {
     path: "/:pathMatch(.*)*", // Catch-all route for bad URLs
