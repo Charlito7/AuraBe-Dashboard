@@ -52,10 +52,6 @@ eslintcache
 *.log
 *.map
 
-# Optional Docker files (if using Docker)
-docker-compose.override.yml
-Dockerfile
-
 # lock files
 package-lock.json
 yarn.lock
