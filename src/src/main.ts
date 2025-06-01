@@ -26,6 +26,7 @@ app.mixin({
   },
 });
 app.use(BootstrapVueNext);
+// @ts-ignore
 app.use(VueApexCharts);
 
 app.mount('#app')
