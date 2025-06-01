@@ -36,4 +36,4 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 # ✅ Ici à la RACINE
-serviceAccount: 274796274461-compute@developer.gserviceaccount.com
+serviceAccount: 274796274461@cloudbuild.gserviceaccount.com
