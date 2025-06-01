@@ -5,9 +5,10 @@ steps:
     args:
       - '-c'
       - |
+        echo "📦 Récupération du .env.production depuis Secret Manager"
         gcloud secrets versions access latest --secret=frontend-env-production > .env.production
 
-  # Étape 1 : Build de l'image Docker avec .env.production inclus
+  # Étape 1 : Build de l'image Docker
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/kode-461516/kode-pos-frontend', '.']
 
@@ -15,7 +16,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/kode-461516/kode-pos-frontend']
 
-  # Étape 3 : Déployer sur Cloud Run
+  # Étape 3 : Déploiement Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
       [
@@ -30,6 +31,9 @@ steps:
 images:
   - gcr.io/kode-461516/kode-pos-frontend
 
+# ✅ Logging + service account
 options:
   logging: CLOUD_LOGGING_ONLY
-  serviceAccount: 274796274461@cloudbuild.gserviceaccount.com
+
+# ✅ Ici à la RACINE
+serviceAccount: 274796274461@cloudbuild.gserviceaccount.com
