@@ -21,7 +21,7 @@ steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
       [
-        'run', 'deploy', 'aurabe-frontend',
+        'run', 'deploy', 'kode-pos',
         '--image', 'gcr.io/kode-461516/kode-pos-frontend',
         '--region', 'us-east1',
         '--platform', 'managed',
