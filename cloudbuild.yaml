@@ -1,0 +1,26 @@
+steps:
+  # Étape 1 : Construire l'image Docker
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/kode-461516/kode-pos-frontend', '.']
+
+  # Étape 2 : Pousser l'image dans Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/kode-461516/kode-pos-frontend']
+
+  # Étape 3 : Déployer sur Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      [
+        'run', 'deploy', 'aurabe-frontend',
+        '--image', 'gcr.io/kode-461516/kode-pos-frontend',
+        '--region', 'us-east1',
+        '--platform', 'managed',
+        '--allow-unauthenticated',
+        '--port', '80'
+      ]
+
+images:
+  - gcr.io/kode-461516/kode-pos-frontend
+
+options:
+  logging: CLOUD_LOGGING_ONLY
