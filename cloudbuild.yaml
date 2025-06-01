@@ -6,7 +6,7 @@ steps:
       - '-c'
       - |
         echo "📦 Récupération du .env.production depuis Secret Manager"
-        gcloud secrets versions access latest --secret=frontend-env-production > .env
+        gcloud secrets versions access latest --secret=frontend-env-production > .env.production
 
   # Étape 1 : Build de l'image Docker
   - name: 'gcr.io/cloud-builders/docker'
