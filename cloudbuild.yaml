@@ -1,9 +1,17 @@
 steps:
-  # Étape 1 : Construire l'image Docker
+  # Étape 0 : Récupérer .env.production depuis Secret Manager
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud secrets versions access latest --secret=frontend-env-production > .env.production
+
+  # Étape 1 : Build de l'image Docker avec .env.production inclus
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/kode-461516/kode-pos-frontend', '.']
 
-  # Étape 2 : Pousser l'image dans Container Registry
+  # Étape 2 : Push de l’image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/kode-461516/kode-pos-frontend']
 
