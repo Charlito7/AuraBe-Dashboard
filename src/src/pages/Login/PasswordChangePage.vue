@@ -167,11 +167,22 @@ export default defineComponent({
       }
 
       isLoading.value = true;
+const storedUser = localStorage.getItem('user');
 
+const email = ""
+if (storedUser) {
+  const user = JSON.parse(storedUser);
+  const email = user.email;
+
+  console.log("User's email:", email);
+}else{
+    return
+}
       try {
         const model = {
           oldPassword: currentPassword.value,
-          newPassword: newPassword.value
+          newPassword: newPassword.value,
+          email : email,
         };
         const response = await api.post<boolean>(process.env.VUE_APP_PASSWORD_CHANGE, model);
         
