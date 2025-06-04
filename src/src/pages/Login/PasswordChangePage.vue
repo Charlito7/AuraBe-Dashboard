@@ -168,13 +168,10 @@ export default defineComponent({
 
       isLoading.value = true;
 const storedUser = localStorage.getItem('user');
-
-const email = ""
+let email = ""
 if (storedUser) {
   const user = JSON.parse(storedUser);
-  const email = user.email;
-
-  console.log("User's email:", email);
+  email = user.email;
 }else{
     return
 }
@@ -185,7 +182,6 @@ if (storedUser) {
           email : email,
         };
         const response = await api.post<boolean>(process.env.VUE_APP_PASSWORD_CHANGE, model);
-        
         if (response.data) {
           openModal(true);
         } else {

@@ -235,8 +235,7 @@ const selectedSale = ref<SalesMetadataAndProductResponseDTO>(props.saleDetails |
   watch(
   selectedSale,
   (newValue, oldValue) => {
-    console.log("selectedSale changed:", newValue);
-    // Perform any actions you need when selectedSale changes
+
   },
   { deep: true } // Enable deep watching for nested objects
 );
