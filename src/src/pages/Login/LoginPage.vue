@@ -112,12 +112,7 @@ export default {
         };
 
         const response = await api.post<LoginResponse>(process.env.VUE_APP_LOGIN, model);
-        if (response.data.result.isNewPasswordRequired) {
-          router.push(process.env.VUE_APP_PASSWORD_CHANGE_PAGE);
-          return;
-        }
-
-  
+        
         if (response.status === 200) {
           const user = {
             firstName: response.data.result.firstName,
@@ -130,6 +125,10 @@ export default {
           };
 
           localStorage.setItem('user', JSON.stringify(user));
+          if (response.data.result.isNewPasswordRequired) {
+          router.push(process.env.VUE_APP_PASSWORD_CHANGE_PAGE);
+          return;
+        }
           const redirectUrl = localStorage.getItem("redirectAfterLogin") || "/";
           localStorage.removeItem("redirectAfterLogin");
           router.push(redirectUrl);
