@@ -141,7 +141,7 @@ export default {
         } else if (error.request) {
           errorMessage.value = "Le serveur ne répond pas. Veuillez réessayer plus tard.";
         } else {
-          errorMessage.value = "Une erreur s'est produite. Veuillez réessayer.";
+          errorMessage.value = `Une erreur s'est produite. Veuillez réessayer. (${error.message})`;
         }
       } finally {
         isLoading.value = false;
