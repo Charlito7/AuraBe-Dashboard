@@ -81,6 +81,7 @@ interface LoginResponse {
     firstName: string;
     lastName: string;
     initial: string;
+    email: string;
     userRoles: string[] | string;
   };
 }
@@ -111,17 +112,18 @@ export default {
         };
 
         const response = await api.post<LoginResponse>(process.env.VUE_APP_LOGIN, model);
-        
         if (response.data.result.isNewPasswordRequired) {
           router.push(process.env.VUE_APP_PASSWORD_CHANGE_PAGE);
           return;
         }
 
+  
         if (response.status === 200) {
           const user = {
             firstName: response.data.result.firstName,
             lastName: response.data.result.lastName,
             initial: response.data.result.initial,
+            email: response.data.result.email,
             roles: Array.isArray(response.data.result.userRoles)
               ? response.data.result.userRoles.join("/")
               : ""
@@ -135,13 +137,10 @@ export default {
       } catch (error: any) {
         console.error("Login error:", error);
         if (error.response) {
-          // Erreur retournée par l'API
           errorMessage.value = error.response.data.message || "Identifiants incorrects";
         } else if (error.request) {
-          // La requête a été faite mais aucune réponse n'a été reçue
           errorMessage.value = "Le serveur ne répond pas. Veuillez réessayer plus tard.";
         } else {
-          // Erreur lors de la configuration de la requête
           errorMessage.value = "Une erreur s'est produite. Veuillez réessayer.";
         }
       } finally {
