@@ -21,7 +21,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "DashboardPage",
     component: DashboardPage,
-   meta: { requiresAuth: true, roles: ["Seller", "Admin"] }
+   meta: { requiresAuth: true, roles: ["Seller", "Admin","Manager"] }
   },
     {
     path: "/passwordChange",
