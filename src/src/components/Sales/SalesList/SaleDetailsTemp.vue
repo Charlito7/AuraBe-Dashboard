@@ -85,19 +85,19 @@
                     {{product.productCode}}
                   </td>
                   <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
-                    $  {{product.unitCost}}
+                    HTG  {{product.unitCost}}
                   </td>
                   <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
                     {{product.quantity}}
                   </td>
                   <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
-                    $ 0.00
+                    HTG 0.00
                   </td>
                   <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
-                    $ 0.00
+                    HTG 0.00
                   </td>
                   <td class="shadow-none lh-1 fs-14 fw-normal text-paragraph">
-                    $  {{(product.quantity * product.unitCost).toFixed(2)}}
+                    HTG  {{(product.quantity * product.unitCost).toFixed(2)}}
                   </td>
                 </tr>
                 <tr>
@@ -181,7 +181,7 @@
                     DUE
                   </td>
                   <td class="shadow-none lh-1 fs-14 fw-semibold text-paragraph br-1">
-                    $ 0.00
+                    HTG 0.00
                   </td>
                 </tr>
               </tbody>
