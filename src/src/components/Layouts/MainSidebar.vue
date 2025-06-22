@@ -5,7 +5,7 @@
   >
     <div id="sidebar_menu_wrap" class="sidebar-menu-wrap">
       <ul class="sidebar-menu list-style">
-        <li class="nav-item" v-if="hasRole(['Seller', 'Admin'])">
+        <li class="nav-item" v-if="hasRole(['Seller', 'Admin','Manager'])">
           <router-link to="/" class="nav-link">
             <img src="../../assets/img/icons/dashboard.svg" alt="Image" />
             <span class="nav-text d-block fs-14 fw-light"> Dashboard </span>
@@ -33,13 +33,13 @@
         </li>
 
         <!-- Sales -->
-        <li class="nav-item" v-if="hasRole('Admin')">
+        <li class="nav-item" v-if="hasRole(['Admin','Manager'])">
           <a href="javascript:void(0)" class="nav-link">
             <img src="../../assets/img/icons/sale.svg" alt="Image" />
             <span class="nav-text d-block fs-14"> Sales </span>
           </a>
           <ul class="sidebar-secondary-menu bg-white list-style">
-            <li class="nav-item">
+            <li class="nav-item" v-if="hasRole('Admin')">
               <router-link to="/create-sales">
                 <img src="../../assets/img/icons/create-item.svg" alt="Image" />
                 Create Sale
