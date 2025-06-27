@@ -27,7 +27,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import api from "@/services/api";
-import { format, subDays, startOfWeek, endOfWeek, startOfMonth, endOfMonth } from "date-fns";
+import { format, subDays} from "date-fns";
 
 interface DateRange {
   startDate: string;
