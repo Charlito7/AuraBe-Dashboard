@@ -8,7 +8,7 @@
           <div class="card border-0 rounded-1 mb-20">
         <div class="card-body p-xl-40">
           <h6 class="card-title fw-semiBold fs-18 mb-30">
-            This Weeks Sales & Purchases
+            Sales report 
           </h6>
           <ThisWeeksSalesPurchasesChart />
         </div>

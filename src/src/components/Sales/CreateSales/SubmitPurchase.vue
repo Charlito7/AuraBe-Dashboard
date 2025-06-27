@@ -208,10 +208,10 @@ interface SubmitPurchase {
 
 interface Product {
   id: string;
-  name: string; // Name is required, based on the validation attribute in your C# class
+  name: string;
   description: string;
-  barCode?: string; // Optional field, represented with ?
-  categoryName?: string; // Optional field, represented with ?
+  barCode?: string;
+  categoryName?: string;
   expiredDate: Date;
   quantity: number;
   price: number;
