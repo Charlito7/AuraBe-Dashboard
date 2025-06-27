@@ -70,7 +70,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/sales-list",
     name: "SalesListPage",
     component: SalesListPage,
-    meta: { requiresAuth: true, roles: ["Admin","Seller"] }
+    meta: { requiresAuth: true, roles: ["Admin","Seller","Manager"] }
   },
   {
     path: "/sale-details/:id",
