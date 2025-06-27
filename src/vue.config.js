@@ -1,37 +1,36 @@
 const { defineConfig } = require("@vue/cli-service");
 const webpack = require("webpack");
-// Uncomment if you want to analyze bundle
-// const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = defineConfig({
   transpileDependencies: true,
+  
+  // Add this new configuration:
+  devServer: {
+    headers: {
+      'Content-Security-Policy': [
+        "default-src 'self';",
+        "connect-src 'self' https:;",
+        "img-src 'self' data: https:;",
+        "script-src 'self' 'unsafe-eval' 'unsafe-inline';",
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;",
+        "font-src 'self' data: https://fonts.gstatic.com;",
+        "frame-src 'self';",
+      ].join(' ')
+    }
+  },
 
   configureWebpack: {
     plugins: [
       new webpack.DefinePlugin({
         __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
       }),
-      // Uncomment if you want to analyze bundle
-      // new BundleAnalyzerPlugin(),
     ],
-
     optimization: {
       splitChunks: {
-        chunks: "all", // split all types of chunks (async + initial)
+        chunks: "all",
         automaticNameDelimiter: "-",
-        maxSize: 300000, // ~300 KB max per chunk
+        maxSize: 300000,
       },
     },
   },
-
-  // Optional: gzip compression of output files (you need compression-webpack-plugin)
-  // chainWebpack: config => {
-  //   config.plugin("compression").use(require("compression-webpack-plugin"), [
-  //     {
-  //       test: /\.(js|css|html|svg)$/,
-  //       threshold: 10240, // compress files over 10 KB
-  //       minRatio: 0.8,
-  //     },
-  //   ]);
-  // },
 });
