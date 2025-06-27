@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@types/aos": "^3.0.7",
+    "@types/date-fns": "^2.5.3",
     "@types/lodash": "^4.17.15",
     "@types/webpack-env": "^1.18.5",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
